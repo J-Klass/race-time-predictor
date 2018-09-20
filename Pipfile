@@ -4,9 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+flask = "*"
 
 [dev-packages]
 pre-commit = "*"
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+start = "FLASK_ENV=development python src/server.py"
+format = "pipenv run pre-commit run --all-files"
