@@ -5,12 +5,14 @@ name = "pypi"
 
 [packages]
 flask = "*"
+stravalib = "*"
+black = "*"
 
 [dev-packages]
 pre-commit = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"
 
 [scripts]
 start = "python src/server.py"
