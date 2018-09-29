@@ -12,3 +12,9 @@ __pycache__/
 *.pyc
 *.pyo
 *$py.class
+
+# Node
+node_modules/
+
+# Webpack
+dist/
