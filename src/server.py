@@ -4,7 +4,8 @@ import os
 from flask import Flask, request, send_from_directory
 
 from server.config import load_config
-from server.auth import get_access_token
+from server.queries import fetch_profile
+from server.auth import get_access_credentials
 
 app = Flask(__name__)
 is_dev = "FLASK_ENV" in os.environ and os.environ["FLASK_ENV"] == "development"
@@ -22,12 +23,12 @@ client_id, client_secret = load_config(os.path.join(project_dir, "config.json"))
 def get_profile():
     # Fetch access token using code
     code = request.args.get("code")
-    access_token = get_access_token(client_id, client_secret, code)
+    access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
     if access_token is None:
         return json.dumps({"success": False}), 400, {"ContentType": "application/json"}
 
-    # TODO fetch and return profile information
-    profile = {}
+    # Fetch athlete profile and stats
+    profile = fetch_profile(access_token, athlete_id)
 
     return (
         json.dumps({"success": True, "profile": profile}),
@@ -40,7 +41,7 @@ def get_profile():
 def get_predictions():
     # Fetch access token using code
     code = request.args.get("code")
-    access_token = get_access_token(client_id, client_secret, code)
+    access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
     if access_token is None:
         return json.dumps({"success": False}), 400, {"ContentType": "application/json"}
 
