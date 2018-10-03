@@ -1,60 +1,80 @@
 import json
 import os
 
-from flask import Flask, redirect, request, send_from_directory
-from stravalib import Client
+from flask import Flask, request, send_from_directory
+
+from server.config import load_config
+from server.queries import fetch_profile
+from server.auth import get_access_credentials
 
 app = Flask(__name__)
 is_dev = "FLASK_ENV" in os.environ and os.environ["FLASK_ENV"] == "development"
 
-# Strava API client
-client = Client()
-
 # Directories
-current_dir = os.path.dirname(os.path.realpath(__file__))
-parent_dir = os.path.dirname(current_dir)
-static_dir = os.path.join(parent_dir, "dist")
+src_dir = os.path.dirname(os.path.realpath(__file__))
+project_dir = os.path.dirname(src_dir)
+static_dir = os.path.join(project_dir, "dist")
+
+# Configuration
+client_id, client_secret = load_config(os.path.join(project_dir, "config.json"))
 
 
-if is_dev:
-    BASE_URL = "http://localhost:3000"
-else:
-    BASE_URL = "http://localhost:3000"  # TODO
-
-
-with open(os.path.join(os.path.dirname(current_dir), "config.json")) as config_file:
-    config = json.load(config_file)
-    CLIENT_ID = config["clientId"]
-    CLIENT_SECRET = config["clientSecret"]
-
-
-@app.route("/auth-new", methods=["GET"])
-def get_auth_url():
-    redirect_uri = BASE_URL + "/auth-redirect"
-    url = client.authorization_url(client_id=CLIENT_ID, scope="write", redirect_uri=redirect_uri)
-    return redirect(url, code=302)
-
-
-@app.route("/auth-redirect", methods=["GET"])
-def parse_tokens():
+@app.route("/profile", methods=["GET"])
+def get_profile():
+    # Fetch access token using code
     code = request.args.get("code")
-    access_token = client.exchange_code_for_token(
-        client_id=CLIENT_ID, client_secret=CLIENT_SECRET, code=code
+    access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
+    if access_token is None:
+        return json.dumps({"success": False}), 400, {"ContentType": "application/json"}
+
+    # Fetch athlete profile and stats
+    profile = fetch_profile(access_token, athlete_id)
+
+    return (
+        json.dumps({"success": True, "profile": profile}),
+        200,
+        {"ContentType": "application/json"},
     )
-    print(access_token)
-    return redirect("/", code=302)
+
+
+@app.route("/predictions", methods=["GET"])
+def get_predictions():
+    # Fetch access token using code
+    code = request.args.get("code")
+    access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
+    if access_token is None:
+        return json.dumps({"success": False}), 400, {"ContentType": "application/json"}
+
+    # TODO fetch activity information
+    # TODO return predictions
+    predictions = {}
+
+    return (
+        json.dumps({"success": True, "predictions": predictions}),
+        200,
+        {"ContentType": "application/json"},
+    )
 
 
 # Serve static files in development mode (handled by nginx in production)
 if is_dev:
 
-    @app.route("/", methods=["GET"])
-    def get_html():
-        return send_from_directory(static_dir, "index.html")
+    @app.route("/css/<path:path>", methods=["GET"])
+    def get_css(path):
+        return send_from_directory(os.path.join(static_dir, "css"), path)
 
-    @app.route("/<path:path>")
+    @app.route("/img/<path:path>", methods=["GET"])
+    def get_img(path):
+        return send_from_directory(os.path.join(static_dir, "img"), path)
+
+    @app.route("/js/<path:path>", methods=["GET"])
+    def get_js(path):
+        return send_from_directory(os.path.join(static_dir, "js"), path)
+
+    @app.route("/", methods=["GET"], defaults={"path": ""})
+    @app.route("/<path:path>", methods=["GET"])
     def catch_all(path):
-        return send_from_directory(static_dir, path)
+        return send_from_directory(static_dir, "index.html")
 
 
 if __name__ == "__main__":

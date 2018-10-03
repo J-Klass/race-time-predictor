@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "vue-cli-service build src/client.js --watch",
+		"start": "vue-cli-service build src/client.js --watch --mode production",
 		"build": "vue-cli-service build src/client.js",
 		"lint": "vue-cli-service lint"
 	},

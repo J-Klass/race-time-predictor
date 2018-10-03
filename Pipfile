@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-stravalib = "*"
 black = "*"
+flask = "*"
+requests = "*"
 
 [dev-packages]
 pre-commit = "*"
@@ -17,3 +17,6 @@ python_version = "3.6"
 [scripts]
 start = "python src/server.py"
 format = "pre-commit run --all-files"
+
+[pipenv]
+allow_prereleases = true
