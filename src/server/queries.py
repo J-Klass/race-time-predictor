@@ -5,6 +5,16 @@ api_url = "https://www.strava.com/api/v3"
 
 
 def fetch_profile(access_token, athlete_id):
+    """
+    Fetch athlete's profile and stats from Strava and combine relevant information into a dict
+    :param access_token: User's OAuth 2 access token for the Strava API
+    :type access_token: str
+    :param athlete_id: User's Strava account ID
+    :type athlete_id: str
+    :return: profile
+    :rtype: dict
+    """
+
     headers = {"Authorization": "Bearer " + access_token}
 
     # Fetch athlete profile
@@ -28,6 +38,14 @@ def fetch_profile(access_token, athlete_id):
 
 
 def fetch_activities(access_token):
+    """
+    Fetch athlete's activities from Strava
+    :param access_token: User's OAuth 2 access token for the Strava API
+    :type access_token: str
+    :return: activities
+    :rtype: list
+    """
+
     headers = {"Authorization": "Bearer " + access_token}
 
     # Fetch list of athlete's activities

@@ -8,6 +8,8 @@ from server.queries import fetch_activities, fetch_profile
 from server.auth import get_access_credentials
 
 app = Flask(__name__)
+
+# Detect development/production environment from env variable
 is_dev = "FLASK_ENV" in os.environ and os.environ["FLASK_ENV"] == "development"
 
 # Directories
@@ -21,6 +23,14 @@ client_id, client_secret = load_config(os.path.join(project_dir, "config.json"))
 
 @app.route("/profile", methods=["GET"])
 def get_profile():
+    """
+    Fetch athlete profile and total stats from Strava, extract relevant information, and send it
+    back to the client
+    Request must contain OAuth 2 code as query param
+    :return: profile
+    :rtype: JSON object
+    """
+
     # Fetch access token using code
     code = request.args.get("code")
     access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
@@ -39,6 +49,14 @@ def get_profile():
 
 @app.route("/predictions", methods=["GET"])
 def get_predictions():
+    """
+    Fetch athlete activities from Strava, run machine-learning algorithm to obtain predictions, and
+    return relevant results to the client
+    Request must contain OAuth 2 code as query param
+    :return: predictions
+    :rtype: JSON object
+    """
+
     # Fetch access token using code
     code = request.args.get("code")
     access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
