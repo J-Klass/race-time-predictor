@@ -4,17 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-black = "*"
 flask = "*"
 requests = "*"
 
 [dev-packages]
-pre-commit = "*"
+black = "*"
+"flake8" = "*"
 
 [requires]
 python_version = "3.6"
 
 [scripts]
+init = "git config core.hooksPath .hooks"
 start = "python src/server.py"
 format = "pre-commit run --all-files"
 

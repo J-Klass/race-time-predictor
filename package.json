@@ -16,13 +16,6 @@
 		"@vue/cli-plugin-eslint": "^3.0.4",
 		"@vue/cli-service": "^3.0.4",
 		"@vue/eslint-config-airbnb": "^3.0.4",
-		"husky": "^1.0.1",
 		"vue-template-compiler": "^2.5.17"
-	},
-	"husky": {
-    "hooks": {
-      "pre-commit": "yarn lint",
-      "pre-push": "yarn lint"
-    }
-  }
+	}
 }
