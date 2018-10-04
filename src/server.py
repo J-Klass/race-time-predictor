@@ -4,7 +4,7 @@ import os
 from flask import Flask, request, send_from_directory
 
 from server.config import load_config
-from server.queries import fetch_profile
+from server.queries import fetch_activities, fetch_profile
 from server.auth import get_access_credentials
 
 app = Flask(__name__)
@@ -45,8 +45,11 @@ def get_predictions():
     if access_token is None:
         return json.dumps({"success": False}), 400, {"ContentType": "application/json"}
 
-    # TODO fetch activity information
-    # TODO return predictions
+    # Fetch athlete's activities
+    activities = fetch_activities(access_token)
+    print(activities)
+
+    # TODO calculate and return predictions
     predictions = {}
 
     return (

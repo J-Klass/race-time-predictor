@@ -25,3 +25,13 @@ def fetch_profile(access_token, athlete_id):
         "yearRuns": stats["ytd_run_totals"],
         "allRuns": stats["all_run_totals"],
     }
+
+
+def fetch_activities(access_token):
+    headers = {"Authorization": "Bearer " + access_token}
+
+    # Fetch list of athlete's activities
+    r = requests.get(api_url + "/athlete/activities", headers=headers)
+    activities = r.json()
+
+    return activities
