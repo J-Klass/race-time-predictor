@@ -20,6 +20,6 @@ def get_access_credentials(client_id, client_secret, code):
     data = r.json()
 
     if "errors" in data:
-        return None
-    else:
-        return data["access_token"], data["athlete"]["id"]
+        raise ValueError(data["message"])
+
+    return data["access_token"], data["athlete"]["id"]

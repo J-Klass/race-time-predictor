@@ -1,11 +1,11 @@
-import json
 import os
 
 from flask import Flask, request, send_from_directory
 
+from server.auth import get_access_credentials
 from server.config import load_config
 from server.queries import fetch_activities, fetch_profile
-from server.auth import get_access_credentials
+from server.responses import success, error
 
 app = Flask(__name__)
 
@@ -33,18 +33,18 @@ def get_profile():
 
     # Fetch access token using code
     code = request.args.get("code")
-    access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
-    if access_token is None:
-        return json.dumps({"success": False}), 400, {"ContentType": "application/json"}
+    try:
+        access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
+    except ValueError as e:
+        return error(e)
 
     # Fetch athlete profile and stats
-    profile = fetch_profile(access_token, athlete_id)
+    try:
+        profile = fetch_profile(access_token, athlete_id)
+    except ValueError as e:
+        return error(e)
 
-    return (
-        json.dumps({"success": True, "profile": profile}),
-        200,
-        {"ContentType": "application/json"},
-    )
+    return success(profile)
 
 
 @app.route("/predictions", methods=["GET"])
@@ -59,22 +59,23 @@ def get_predictions():
 
     # Fetch access token using code
     code = request.args.get("code")
-    access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
-    if access_token is None:
-        return json.dumps({"success": False}), 400, {"ContentType": "application/json"}
+    try:
+        access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
+    except ValueError as e:
+        return error(e)
 
     # Fetch athlete's activities
-    activities = fetch_activities(access_token)
+    try:
+        activities = fetch_activities(access_token)
+    except ValueError as e:
+        return error(e)
+
     print(activities)
 
     # TODO calculate and return predictions
     predictions = {}
 
-    return (
-        json.dumps({"success": True, "predictions": predictions}),
-        200,
-        {"ContentType": "application/json"},
-    )
+    return success(predictions)
 
 
 # Serve static files in development mode (handled by nginx in production)

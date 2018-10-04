@@ -20,10 +20,14 @@ def fetch_profile(access_token, athlete_id):
     # Fetch athlete profile
     r1 = requests.get(api_url + "/athlete", headers=headers)
     profile = r1.json()
+    if "errors" in profile:
+        raise ValueError(profile["message"])
 
     # Fetch athlete stats
     r2 = requests.get(api_url + "/athletes/{0}/stats".format(athlete_id), headers=headers)
     stats = r2.json()
+    if "errors" in stats:
+        raise ValueError(stats["message"])
 
     return {
         "firstName": profile["firstname"],
@@ -51,5 +55,7 @@ def fetch_activities(access_token):
     # Fetch list of athlete's activities
     r = requests.get(api_url + "/athlete/activities", headers=headers)
     activities = r.json()
+    if "errors" in activities:
+        raise ValueError(activities["message"])
 
     return activities
