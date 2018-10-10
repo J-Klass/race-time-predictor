@@ -16,8 +16,9 @@ python_version = "3.6"
 
 [scripts]
 init = "git config core.hooksPath .hooks"
+format = "black . --line-length=100"
+lint = "flake8 . --max-line-length=100"
 start = "python src/server.py"
-format = "pre-commit run --all-files"
 
 [pipenv]
 allow_prereleases = true

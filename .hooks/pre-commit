@@ -1,16 +1,16 @@
 #!/bin/sh
 
-set -e  # exit on subsequent errors
+set -e  # Exit on subsequent errors
 
 # Black (exit with 1 if files were reformatted)
-pipenv run black . --check --line-length=100 || (
-	pipenv run black . --line-length=100 &&
+pipenv run format --check || (
+	pipenv run format &&
 		echo "Python files have been reformatted. Please re-stage and commit your files." &&
 		exit 1
 )
 
 # Flake8
-pipenv run flake8 . --max-line-length=100
+pipenv run lint
 
 # ESLint
 pipenv run yarn lint
