@@ -5,7 +5,7 @@
 *.log
 
 # Config
-config.json
+.env
 
 # Python
 __pycache__/

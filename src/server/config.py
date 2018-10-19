@@ -1,18 +1,18 @@
-import json
 import os
 
-current_dir = os.path.dirname(os.path.realpath(__file__))
+from dotenv import load_dotenv
 
 
-def load_config(config_path):
+def load_config():
     """
-    Load configuration parameters from config.json file at the specified location
-    :param config_path: Path to config.json file
-    :type config_path: str
+    Load configuration parameters specified in .env file
     :return: client_id, client_secret
     :rtype: str, str
     """
 
-    with open(config_path) as config_file:
-        config = json.load(config_file)
-        return config["clientId"], config["clientSecret"]
+    # Load variables from .env file as system env variables
+    load_dotenv()
+
+    client_id = os.getenv("VUE_APP_CLIENT_ID")
+    client_secret = os.getenv("CLIENT_SECRET")
+    return client_id, client_secret

@@ -18,7 +18,7 @@ project_dir = os.path.dirname(src_dir)
 static_dir = os.path.join(project_dir, "dist")
 
 # Configuration
-client_id, client_secret = load_config(os.path.join(project_dir, "config.json"))
+client_id, client_secret = load_config()
 
 
 @app.route("/profile", methods=["GET"])

@@ -16,14 +16,14 @@ Make sure you have Python, Pipenv, Node.js, and Yarn installed.
 
 ### Configuration
 
-Obtain your [credentials for accessing the Strava API](https://developers.strava.com). Add them to a `config.json` file in the project's root directory:
+Obtain your [credentials for accessing the Strava API](https://developers.strava.com). Rename the [`.env.example`](.env.example) file to `.env` and fill in your Strava app credentials:
 
-```json
-{
-  "clientId": "...",
-  "clientSecret": "..."
-}
 ```
+VUE_APP_CLIENT_ID=your_client_id
+CLIENT_SECRET=your_client_secret
+```
+
+The Flask server now has access to both environment variables; the Vue client only to the client ID (hence the `VIEW_APP_` prefix). 
 
 
 ### Start
