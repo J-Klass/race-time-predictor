@@ -33,8 +33,6 @@ def fetch_profile(access_token, athlete_id):
         "firstName": profile["firstname"],
         "lastName": profile["lastname"],
         "profileImg": profile["profile_medium"],
-        "datePreference": profile["date_preference"],
-        "measurementPreference": profile["measurement_preference"],
         "recentRuns": stats["recent_run_totals"],
         "yearRuns": stats["ytd_run_totals"],
         "allRuns": stats["all_run_totals"],
