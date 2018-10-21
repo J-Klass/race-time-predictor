@@ -21,7 +21,7 @@ static_dir = os.path.join(project_dir, "dist")
 client_id, client_secret = load_config()
 
 
-@app.route("/profile", methods=["GET"])
+@app.route("/api/profile", methods=["GET"])
 def get_profile():
     """
     Fetch athlete profile and total stats from Strava, extract relevant information, and send it
@@ -47,7 +47,7 @@ def get_profile():
     return success(profile)
 
 
-@app.route("/predictions", methods=["GET"])
+@app.route("/api/predictions", methods=["GET"])
 def get_predictions():
     """
     Fetch athlete activities from Strava, run machine-learning algorithm to obtain predictions, and

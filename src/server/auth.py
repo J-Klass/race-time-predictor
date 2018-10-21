@@ -15,7 +15,12 @@ def get_access_credentials(client_id, client_secret, code):
     """
 
     # Fetch access token using code
-    params = {"client_id": client_id, "client_secret": client_secret, "code": code}
+    params = {
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "code": code,
+        "grant_type": "authorization_code",
+    }
     r = requests.post("https://www.strava.com/oauth/token", params=params)
     data = r.json()
 

@@ -32,3 +32,6 @@ rules:
     - tab
     - baseIndent: 1
       switchCase: 1
+
+  # Project-specific rules
+  no-console: 0
