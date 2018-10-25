@@ -1,7 +1,7 @@
 <template>
 	<div class="hero">
 		<div class="hero-inner">
-			<h1>Marathon Time Predictor</h1>
+			<h1>Race Time Predictor</h1>
 			<p class="tagline">TODO tagline</p>
 		</div>
 	</div>

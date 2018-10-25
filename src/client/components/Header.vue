@@ -1,5 +1,5 @@
 <template>
 	<header>
-		<h1>Marathon Time Predictor</h1>
+		<h1>Race Time Predictor</h1>
 	</header>
 </template>

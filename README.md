@@ -1,4 +1,4 @@
-# Marathon Time Predictor
+# Race Time Predictor
 
 ## Development
 

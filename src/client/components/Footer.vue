@@ -11,7 +11,7 @@
 			</icon-base>
 		</a>
 		<br>
-		<a href="https://github.com/J-Klass/marathon-time-predictor">
+		<a href="https://github.com/J-Klass/race-time-predictor">
 			<icon-base
 				height="20"
 				view-box="0 0 1024 999"
