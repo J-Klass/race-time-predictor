@@ -1,5 +1,6 @@
 {
-	"name": "strava-time-predictor",
+	"name": "marathon-time-predictor",
+	"description": "TODO tagline",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -8,6 +9,7 @@
 		"lint": "vue-cli-service lint"
 	},
 	"dependencies": {
+		"minireset.css": "^0.0.3",
 		"vue": "^2.5.17",
 		"vue-router": "^3.0.1"
 	},

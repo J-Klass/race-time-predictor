@@ -12,10 +12,9 @@
 
 <script>
 	export default {
-		name: 'LoginRedirect',
 		data() {
 			return {
-				err: false
+				err: false,
 			};
 		},
 		created() {
@@ -41,6 +40,6 @@
 			// Save code and redirect to Athlete page
 			localStorage.setItem('oauthCode', oauthCode);
 			this.$router.push('/athlete');
-		}
+		},
 	};
 </script>

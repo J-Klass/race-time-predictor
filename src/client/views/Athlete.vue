@@ -7,11 +7,10 @@
 
 <script>
 	export default {
-		name: 'Athlete',
 		data() {
 			return {
 				profile: {},
-				predictions: {}
+				predictions: {},
 			};
 		},
 		created() {
@@ -35,6 +34,6 @@
 					// TODO: Error handling
 					console.error(err);
 			});
-		}
+		},
 	};
 </script>

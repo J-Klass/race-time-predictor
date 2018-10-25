@@ -5,8 +5,47 @@
 </template>
 
 <style>
+	/* Style reset */
+	@import "~minireset.css/minireset.min.css";
+
 	#app {
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-			sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+		/* Variables */
+		--color-background-hero: #E4EDF4;
+		--color-text-faded: #838383;
+		--color-text-faded-dark: #626262;
+		--color-strava: #FC4C02;
+		--color-strava-dark: #DD4302;
+		--color-text: #1D1D1D;
+		--color-white: #EFEFEF;
+		--font-family: 'Heebo', sans-serif;
+		--font-size-small: 80%;
+		--font-size-normal: 18px;
+		--font-weight-normal: 400;
+		--font-weight-bold: 900;
+		--line-height: 1.7;
+		--spacing-abs-small: 20px;
+		--spacing-abs-large: 40px;
+		--spacing-rel-small: 5vw;
+		--spacing-rel-large: 10vw;
+		--transition: 0.15s;
+
+		/* Global styles */
+		font-family: var(--font-family);
+		font-size: var(--font-size-normal);
+		font-weight: var(--font-weight-normal);
+		line-height: var(--line-height);
+		color: var(--color-text);
+	}
+
+	main {
+		width: 100%;
+		max-width: 1000px;
+		padding: var(--spacing-rel-large);
+		margin: 0 auto;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
 	}
 </style>

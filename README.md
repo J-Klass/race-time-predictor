@@ -1,4 +1,4 @@
-# Strava Time Predictor
+# Marathon Time Predictor
 
 ## Development
 
