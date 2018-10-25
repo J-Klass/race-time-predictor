@@ -10,7 +10,12 @@
 				<icon-powered-by-strava />
 			</icon-base>
 		</a>
-		<br>
+		<p>
+			Created by
+			<a href="https://github.com/J-Klass">Jonas Klass</a>
+			and
+			<a href="https://samuelmeuli.com">Samuel Meuli</a>
+		</p>
 		<a href="https://github.com/J-Klass/race-time-predictor">
 			<icon-base
 				height="20"
@@ -57,8 +62,8 @@
 		color: var(--color-text-faded-dark);
 	}
 
-	.powered-by-strava {
-		margin-bottom: var(--spacing-abs-small);
+	footer > * {
+		margin-bottom: calc(var(--spacing-abs-small) / 2);
 	}
 
 	.icon-github {
