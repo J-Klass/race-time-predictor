@@ -12,11 +12,7 @@ parserOptions:
 
 rules:
   # General
-  comma-dangle:
-    - 2
-    - never
   no-tabs: 0
-  object-curly-newline: 0
   object-curly-spacing:
     - 2
     - always
@@ -24,6 +20,10 @@ rules:
 
   # Vue
   indent: 0
+  vue/html-closing-bracket-newline:
+    - 2
+    - singleline: never
+      multiline: always
   vue/html-indent:
     - 2
     - tab

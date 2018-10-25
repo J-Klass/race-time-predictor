@@ -16,22 +16,22 @@ export default new Router({
 		{
 			path: '/',
 			name: 'home',
-			component: Home
+			component: Home,
 		},
 		{
 			path: '/athlete',
 			name: 'athlete',
-			component: Athlete
+			component: Athlete,
 		},
 		{
 			path: '/login-redirect',
 			name: 'login-redirect',
-			component: LoginRedirect
+			component: LoginRedirect,
 		},
 		{
 			path: '*',
 			name: 'not-found',
-			component: NotFound
-		}
-	]
+			component: NotFound,
+		},
+	],
 });
