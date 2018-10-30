@@ -5,6 +5,7 @@ from flask import Flask, request, send_from_directory
 from server.auth import get_access_credentials
 from server.config import load_config
 from server.queries import fetch_activities, fetch_profile
+from server.predictions import calculate_predictions
 from server.responses import success, error
 
 app = Flask(__name__)
@@ -72,8 +73,11 @@ def get_predictions():
 
     print(activities)
 
-    # TODO calculate and return predictions
-    predictions = {}
+    # Calculate predictions & TODO: graph data
+    try:
+        predictions = calculate_predictions(activities)
+    except ValueError as e:
+        return error(e)
 
     return success(predictions)
 

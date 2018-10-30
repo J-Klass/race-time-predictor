@@ -7,6 +7,10 @@ name = "pypi"
 flask = "*"
 requests = "*"
 python-dotenv = "*"
+pandas = "*"
+numpy = "*"
+scipy = "*"
+scikit-learn = "*"
 
 [dev-packages]
 black = "*"
