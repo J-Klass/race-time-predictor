@@ -44,7 +44,7 @@
 					client_id: clientId,
 					redirect_uri: `${baseUrl}/login-redirect`,
 					response_type: 'code',
-					scope: 'read_all',
+					scope: 'activity:read_all,profile:read_all',
 					state: this.oauthState,
 				};
 				Object.entries(urlParams).forEach(([key, value]) => {
