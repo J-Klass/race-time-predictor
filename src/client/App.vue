@@ -12,15 +12,16 @@
 		/* Variables */
 		--color-background-hero: #E4EDF4;
 		--color-text-faded: #838383;
-		--color-text-faded-dark: #626262;
+		--color-text-faded-dark: #5B5B5B;
 		--color-strava: #FC4C02;
 		--color-strava-dark: #DD4302;
 		--color-text: #1D1D1D;
 		--color-white: #EFEFEF;
-		--font-family: 'Heebo', sans-serif;
+		--font-family: 'Work Sans', sans-serif;
 		--font-size-small: 80%;
-		--font-size-normal: 18px;
+		--font-size-normal: 19px;
 		--font-weight-normal: 400;
+		--font-weight-semibold: 700;
 		--font-weight-bold: 900;
 		--line-height: 1.7;
 		--spacing-abs-small: 20px;
