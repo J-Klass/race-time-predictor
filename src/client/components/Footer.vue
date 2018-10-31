@@ -10,12 +10,23 @@
 				<icon-powered-by-strava />
 			</icon-base>
 		</a>
-		<p>
-			Created by
-			<a href="https://github.com/J-Klass">Jonas Klass</a>
-			and
-			<a href="https://samuelmeuli.com">Samuel Meuli</a>
-		</p>
+		<br>
+		<div>
+			<icon-base
+				height="24"
+				view-box="0 0 24 24"
+				class="icon-terminal"
+			>
+				<icon-terminal />
+			</icon-base>
+			<p>
+				Created by
+				<a href="https://github.com/J-Klass">Jonas Klass</a>
+				and
+				<a href="https://samuelmeuli.com">Samuel Meuli</a>
+			</p>
+		</div>
+		<br>
 		<a href="https://github.com/J-Klass/race-time-predictor">
 			<icon-base
 				height="20"
@@ -33,6 +44,7 @@
 	import IconBase from './icons/IconBase.vue';
 	import IconGithub from './icons/svg/IconGithub.vue';
 	import IconPoweredByStrava from './icons/svg/IconPoweredByStrava.vue';
+	import IconTerminal from './icons/svg/IconTerminal.vue';
 
 
 	export default {
@@ -40,6 +52,7 @@
 			IconBase,
 			IconGithub,
 			IconPoweredByStrava,
+			IconTerminal,
 		},
 	};
 </script>
@@ -52,9 +65,12 @@
 		text-align: center;
 	}
 
-	a {
+	footer > * {
 		display: inline-flex;
 		align-items: center;
+	}
+
+	a {
 		transition: var(--transition);
 	}
 
@@ -62,11 +78,11 @@
 		color: var(--color-text-faded-dark);
 	}
 
-	footer > * {
-		margin-bottom: calc(var(--spacing-abs-small) / 2);
+	.icon-terminal, .icon-github {
+		margin-right: 6px;
 	}
 
 	.icon-github {
-		margin: 0 6px 2px 0;
+		margin-bottom: 2px;
 	}
 </style>
