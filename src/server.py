@@ -4,9 +4,10 @@ from flask import Flask, request, send_from_directory
 
 from server.auth import get_access_credentials
 from server.config import load_config
+from server.exceptions import AuthError
 from server.queries import fetch_activities, fetch_profile
 from server.predictions import calculate_predictions
-from server.responses import success, error
+from server.responses import success, auth_error, server_error
 
 app = Flask(__name__)
 
@@ -36,14 +37,18 @@ def get_profile():
     code = request.args.get("code")
     try:
         access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
-    except ValueError as e:
-        return error(e)
+    except AuthError as e:
+        return auth_error(e)
+    except Exception as e:
+        return server_error(e)
 
     # Fetch athlete profile and stats
     try:
         profile = fetch_profile(access_token, athlete_id)
-    except ValueError as e:
-        return error(e)
+    except AuthError as e:
+        return auth_error(e)
+    except Exception as e:
+        return server_error(e)
 
     return success(profile)
 
@@ -62,22 +67,24 @@ def get_predictions():
     code = request.args.get("code")
     try:
         access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
-    except ValueError as e:
-        return error(e)
+    except AuthError as e:
+        return auth_error(e)
+    except Exception as e:
+        return server_error(e)
 
     # Fetch athlete's activities
     try:
         activities = fetch_activities(access_token)
-    except ValueError as e:
-        return error(e)
-
-    print(activities)
+    except AuthError as e:
+        return auth_error(e)
+    except Exception as e:
+        return server_error(e)
 
     # Calculate predictions & TODO: graph data
     try:
         predictions = calculate_predictions(activities)
-    except ValueError as e:
-        return error(e)
+    except Exception as e:
+        return server_error(e)
 
     return success(predictions)
 

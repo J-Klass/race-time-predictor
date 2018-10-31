@@ -1,5 +1,7 @@
 import requests
 
+from server.exceptions import AuthError
+
 
 def get_access_credentials(client_id, client_secret, code):
     """
@@ -25,6 +27,6 @@ def get_access_credentials(client_id, client_secret, code):
     data = r.json()
 
     if "errors" in data:
-        raise ValueError(data["message"])
+        raise AuthError(data["message"])
 
     return data["access_token"], data["athlete"]["id"]
