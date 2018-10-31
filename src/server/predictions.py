@@ -15,17 +15,30 @@ def calculate_predictions(activities):
     # Convert activities to pandas dataframe
     dataframe = pd.DataFrame(activities)
 
-    # Select only running entries
-    dataframe = dataframe.loc[dataframe["type"] == "Run"]
-
-    # Select relevant columns
-    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
-
     # Get predictions
     predictions = calculate_prediction_5_10_half(dataframe)
     predictions.append(calculate_prediction_marathon(dataframe))
 
     return predictions
+
+
+def clean_dataframe(dataframe, type):
+    """
+    Filter for only running data
+    :param dataframe: A dataframe with all strava data
+    :param type: string with eiter 'Ride' or 'Run'
+    :return: dataframe with only data of type 'Run'
+    """
+
+    # TODO: Delete extreme outliers to avoid data with measuring error
+
+    # Select only running entries
+    dataframe = dataframe.loc[dataframe["type"] == type]
+
+    # Select relevant columns
+    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
+
+    return dataframe
 
 
 def calculate_prediction_marathon(dataframe):
@@ -36,12 +49,14 @@ def calculate_prediction_marathon(dataframe):
     :rtype: int
     """
 
+    dataframe = clean_dataframe(dataframe, "Run")
+
     # Define Target
     X = dataframe.drop("moving_time", axis=1)
     y = dataframe[["moving_time"]]
 
     # Split into training and testing set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random_state=1)
 
     # Train ridge regression model
     ridge_regression_model = Ridge(alpha=0.01)
@@ -61,6 +76,8 @@ def calculate_prediction_5_10_half(dataframe):
     :rtype: int[]
     """
 
+    dataframe = clean_dataframe(dataframe, "Run")
+
     # Filter dataframe by 'Distance'
     dataframe = dataframe.loc[dataframe["distance"] < 40000]
 
@@ -69,7 +86,7 @@ def calculate_prediction_5_10_half(dataframe):
     y = dataframe[["moving_time"]]
 
     # Split into training and testing set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random_state=1)
 
     # Train regression model
     linear_regression_model = LinearRegression()
@@ -88,3 +105,10 @@ def calculate_prediction_5_10_half(dataframe):
     ]
 
     return predictions
+
+
+def calculate_bike_predictions(dataframe):
+
+    # TODO: Calculation of bike predictions
+
+    return
