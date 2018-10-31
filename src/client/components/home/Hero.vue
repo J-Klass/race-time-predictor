@@ -40,17 +40,14 @@
 	}
 
 	h1 {
-		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.05em;
+		font-weight: var(--font-weight-bold);
+		color: var(--color-strava);
 	}
 
 	.tagline {
 		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.025em;
-	}
-
-	h1 {
-		color: var(--color-strava);
 	}
 
 	@media (max-width: 850px) {
