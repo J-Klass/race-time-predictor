@@ -1,5 +1,6 @@
 import requests
 
+from server.exceptions import AuthError
 
 api_url = "https://www.strava.com/api/v3"
 
@@ -21,13 +22,13 @@ def fetch_profile(access_token, athlete_id):
     r1 = requests.get(api_url + "/athlete", headers=headers)
     profile = r1.json()
     if "errors" in profile:
-        raise ValueError(profile["message"])
+        raise AuthError(profile["message"])
 
     # Fetch athlete stats
     r2 = requests.get(api_url + "/athletes/{0}/stats".format(athlete_id), headers=headers)
     stats = r2.json()
     if "errors" in stats:
-        raise ValueError(stats["message"])
+        raise AuthError(stats["message"])
 
     return {
         "firstName": profile["firstname"],
@@ -54,6 +55,6 @@ def fetch_activities(access_token):
     r = requests.get(api_url + "/athlete/activities", headers=headers)
     activities = r.json()
     if "errors" in activities:
-        raise ValueError(activities["message"])
+        raise AuthError(activities["message"])
 
     return activities

@@ -44,7 +44,7 @@
 					client_id: clientId,
 					redirect_uri: `${baseUrl}/login-redirect`,
 					response_type: 'code',
-					scope: 'read_all',
+					scope: 'activity:read_all,profile:read_all',
 					state: this.oauthState,
 				};
 				Object.entries(urlParams).forEach(([key, value]) => {
@@ -64,7 +64,7 @@
 	.login-box {
 		padding: var(--spacing-rel-small) var(--spacing-rel-large);
 		background: var(--color-background-hero);
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--font-weight-semibold);
 		text-align: center;
 	}
 

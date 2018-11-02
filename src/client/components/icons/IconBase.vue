@@ -7,7 +7,7 @@
 		xmlns="http://www.w3.org/2000/svg"
 		role="presentation"
 	>
-		<title v-if="title">Test</title>
+		<title v-if="title">{{ title }}</title>
 		<g :fill="fill">
 			<slot />
 		</g>

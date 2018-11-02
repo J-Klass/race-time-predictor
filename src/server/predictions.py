@@ -105,10 +105,3 @@ def calculate_prediction_5_10_half(dataframe):
     ]
 
     return predictions
-
-
-def calculate_bike_predictions(dataframe):
-
-    # TODO: Calculation of bike predictions
-
-    return

@@ -36,13 +36,18 @@
 
 	h1,
 	.tagline {
-		font-weight: var(--font-weight-bold);
-		letter-spacing: 0.05em;
 		text-transform: uppercase;
 	}
 
 	h1 {
+		letter-spacing: 0.05em;
+		font-weight: var(--font-weight-bold);
 		color: var(--color-strava);
+	}
+
+	.tagline {
+		font-weight: var(--font-weight-semibold);
+		letter-spacing: 0.025em;
 	}
 
 	@media (max-width: 850px) {
