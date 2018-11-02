@@ -4,7 +4,8 @@
 		<main>
 			<Feature
 				icon-position="left"
-				text="TODO"
+				text="Get time estimates for your next run. Race Time Predictor predicts the time for 5Ks,
+					10Ks, half marathons, marathons, or any distance you choose."
 			>
 				<icon-base
 					:height="iconHeight"
@@ -16,7 +17,8 @@
 
 			<Feature
 				icon-position="right"
-				text="TODO"
+				text="Using your past activities and machine learning, Race Time Predictor learns about your
+					fitness level and predicts times for future races."
 			>
 				<icon-base
 					:height="iconHeight"
@@ -28,7 +30,8 @@
 
 			<Feature
 				icon-position="left"
-				text="TODO"
+				text="Race Time Predictor is powered by Strava. It lets you easily import your past runs for
+					its calculations."
 			>
 				<icon-base
 					:height="iconHeight"
@@ -40,7 +43,7 @@
 
 			<Feature
 				icon-position="right"
-				text="TODO"
+				text="We care about your privacy and don't store your activity data."
 			>
 				<icon-base
 					:height="iconHeight"

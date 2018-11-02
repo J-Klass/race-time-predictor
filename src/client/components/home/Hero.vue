@@ -2,7 +2,7 @@
 	<div class="hero">
 		<div class="hero-inner">
 			<h1>Race Time Predictor</h1>
-			<p class="tagline">TODO tagline</p>
+			<p class="tagline">Running time predictions using machine learning</p>
 		</div>
 	</div>
 </template>
