@@ -1,6 +1,5 @@
 <template>
 	<div class="home">
-		<Hero />
 		<main>
 			<Feature
 				icon-position="left"
@@ -53,15 +52,14 @@
 				</icon-base>
 			</Feature>
 		</main>
-		<LoginLink />
-		<Footer />
+		<LoginBox />
 	</div>
 </template>
 
 <script>
 	import Footer from '../components/Footer.vue';
-	import Hero from '../components/home/Hero.vue';
-	import LoginLink from '../components/home/LoginBox.vue';
+	import Hero from '../components/Header.vue';
+	import LoginBox from '../components/home/LoginBox.vue';
 	import Feature from '../components/home/Feature.vue';
 	import IconBase from '../components/icons/IconBase.vue';
 	import IconClock from '../components/icons/svg/IconClock.vue';
@@ -79,7 +77,7 @@
 			Feature,
 			Footer,
 			Hero,
-			LoginLink,
+			LoginBox,
 		},
 		data() {
 			return {

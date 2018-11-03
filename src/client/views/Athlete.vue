@@ -1,6 +1,5 @@
 <template>
 	<div class="athlete">
-		<Header />
 		<main>
 			<h1>Athlete</h1>
 			<p>{{ profile }}</p>

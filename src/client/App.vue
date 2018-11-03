@@ -1,8 +1,22 @@
 <template>
 	<div id="app">
+		<Header />
 		<router-view />
+		<Footer />
 	</div>
 </template>
+
+<script>
+	import Footer from './components/Footer.vue';
+	import Header from './components/Header.vue';
+
+	export default {
+		components: {
+			Footer,
+			Header,
+		},
+	};
+</script>
 
 <style>
 	/* Style reset */
@@ -10,7 +24,7 @@
 
 	#app {
 		/* Variables */
-		--color-background-hero: #E4EDF4;
+		--color-background-header: #E4EDF4;
 		--color-text-faded: #838383;
 		--color-text-faded-dark: #5B5B5B;
 		--color-strava: #FC4C02;
@@ -43,6 +57,11 @@
 		max-width: 1000px;
 		padding: var(--spacing-rel-large);
 		margin: 0 auto;
+	}
+
+	h2 {
+		font-size: 160%;
+		font-weight: var(--font-weight-semibold);
 	}
 
 	a {
