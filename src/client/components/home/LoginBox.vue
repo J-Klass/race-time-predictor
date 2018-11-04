@@ -37,6 +37,11 @@
 		},
 		computed: {
 			loginUrl() {
+				// If OAuth code is found in LocalStorage, point to athlete page
+				if (localStorage.getItem('oauthCode')) {
+					return '/athlete';
+				}
+
 				// Generate URL to Strava login site
 				const loginUrl = new URL(apiUrl);
 				const urlParams = {

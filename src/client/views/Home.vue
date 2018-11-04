@@ -84,11 +84,5 @@
 				iconHeight: 100,
 			};
 		},
-		created() {
-			// If OAuth code is found in LocalStorage, redirect to athlete page
-			if (localStorage.getItem('oauthCode')) {
-				this.$router.push('/athlete');
-			}
-		},
 	};
 </script>
