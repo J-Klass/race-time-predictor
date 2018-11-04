@@ -5,15 +5,15 @@ from server.exceptions import AuthError
 api_url = "https://www.strava.com/api/v3"
 
 
-def fetch_profile(access_token, athlete_id):
-    """
-    Fetch athlete's profile and stats from Strava and combine relevant information into a dict
+def fetch_profile_stats(access_token, athlete_id):
+    """Fetch athlete's profile and stats from Strava and return relevant information
+
     :param access_token: User's OAuth 2 access token for the Strava API
     :type access_token: str
     :param athlete_id: User's Strava account ID
     :type athlete_id: str
-    :return: profile
-    :rtype: dict
+    :return: profile, stats
+    :rtype: dict, dict
     """
 
     headers = {"Authorization": "Bearer " + access_token}
@@ -30,14 +30,18 @@ def fetch_profile(access_token, athlete_id):
     if "errors" in stats:
         raise AuthError(stats["message"])
 
-    return {
+    profile = {
         "firstName": profile["firstname"],
         "lastName": profile["lastname"],
-        "profileImg": profile["profile_medium"],
+        "imgUrl": profile["profile_medium"],
+        "profileUrl": "https://www.strava.com/athletes/" + str(profile["id"]),
+    }
+    stats = {
         "recentRuns": stats["recent_run_totals"],
         "yearRuns": stats["ytd_run_totals"],
         "allRuns": stats["all_run_totals"],
     }
+    return profile, stats
 
 
 def fetch_activities(access_token):

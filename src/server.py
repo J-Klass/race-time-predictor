@@ -5,7 +5,7 @@ from flask import Flask, request, send_from_directory
 from server.auth import get_access_credentials
 from server.config import load_config
 from server.exceptions import AuthError
-from server.queries import fetch_activities, fetch_profile
+from server.queries import fetch_activities, fetch_profile_stats
 from server.predictions import calculate_predictions
 from server.responses import success, auth_error, server_error
 
@@ -23,12 +23,12 @@ static_dir = os.path.join(project_dir, "dist")
 client_id, client_secret = load_config()
 
 
-@app.route("/api/profile", methods=["GET"])
+@app.route("/api/athlete", methods=["GET"])
 def get_profile():
-    """
-    Fetch athlete profile and total stats from Strava, extract relevant information, and send it
-    back to the client
-    Request must contain OAuth 2 code as query param
+    """Fetch athlete profile and activities from Strava, run machine-learning algorithm to obtain
+    predictions, and return relevant results to the client. Request must contain OAuth 2 code as
+    query param
+
     :return: profile
     :rtype: JSON object
     """
@@ -42,37 +42,17 @@ def get_profile():
     except Exception as e:
         return server_error(e)
 
+    data = {}
+
     # Fetch athlete profile and stats
     try:
-        profile = fetch_profile(access_token, athlete_id)
+        data["profile"], data["stats"] = fetch_profile_stats(access_token, athlete_id)
     except AuthError as e:
         return auth_error(e)
     except Exception as e:
         return server_error(e)
 
-    return success(profile)
-
-
-@app.route("/api/predictions", methods=["GET"])
-def get_predictions():
-    """
-    Fetch athlete activities from Strava, run machine-learning algorithm to obtain predictions, and
-    return relevant results to the client
-    Request must contain OAuth 2 code as query param
-    :return: predictions
-    :rtype: JSON object
-    """
-
-    # Fetch access token using code
-    code = request.args.get("code")
-    try:
-        access_token, athlete_id = get_access_credentials(client_id, client_secret, code)
-    except AuthError as e:
-        return auth_error(e)
-    except Exception as e:
-        return server_error(e)
-
-    # Fetch athlete's activities
+    # Fetch athlete's activities and calculate predictions
     try:
         activities = fetch_activities(access_token)
     except AuthError as e:
@@ -80,13 +60,12 @@ def get_predictions():
     except Exception as e:
         return server_error(e)
 
-    # Calculate predictions & TODO: graph data
     try:
-        predictions = calculate_predictions(activities)
+        data["predictions"] = calculate_predictions(activities)
     except Exception as e:
         return server_error(e)
 
-    return success(predictions)
+    return success(data)
 
 
 # Serve static files in development mode (handled by nginx in production)
