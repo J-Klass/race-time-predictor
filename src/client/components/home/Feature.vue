@@ -28,10 +28,6 @@
 		align-items: center;
 	}
 
-	.feature + .feature {
-		margin-top: var(--spacing-rel-small);
-	}
-
 	.feature-description {
 		flex: 1;
 	}

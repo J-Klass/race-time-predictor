@@ -28,6 +28,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		width: 100%;
 		height: 250px;
 		max-height: 100vh;
 		padding: var(--spacing-rel-large);
@@ -44,7 +45,6 @@
 		text-align: center;
 	}
 
-	h1,
 	.tagline {
 		text-transform: uppercase;
 	}

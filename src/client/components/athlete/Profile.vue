@@ -63,10 +63,12 @@
 	.profile {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 	}
 
 	.profile-image {
 		margin-right: var(--spacing-abs-large);
+		border-radius: 50%;
 	}
 
 	.sign-out-link {

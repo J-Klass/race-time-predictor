@@ -1,5 +1,5 @@
 <template>
-	<div class="login-redirect">
+	<div class="login-redirect centered">
 		<div v-if="err">
 			<p>An error occurred while logging in</p>
 			<router-link to="/">Back to start page</router-link>

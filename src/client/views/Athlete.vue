@@ -1,15 +1,15 @@
 <template>
-	<div class="athlete">
+	<div class="athlete centered">
 		<!-- Error -->
-		<main v-if="error">
+		<template v-if="error">
 			TODO error
-		</main>
+		</template>
 		<!-- Loading -->
-		<main v-else-if="isLoading">
+		<template v-else-if="isLoading">
 			TODO loading spinner
-		</main>
+		</template>
 		<!-- Finished loading -->
-		<main v-else>
+		<template v-else>
 			<Profile
 				:first-name="data.profile.firstName"
 				:last-name="data.profile.lastName"
@@ -17,8 +17,10 @@
 				:profile-url="data.profile.profileUrl"
 			/>
 			<Stats />
+			<hr>
 			<Predictions :predictions="data.predictions" />
-		</main>
+			<p>TODO graph</p>
+		</template>
 	</div>
 </template>
 

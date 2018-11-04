@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<main>
+		<div class="centered">
 			<Feature
 				icon-position="left"
 				text="Get time estimates for your next run. Race Time Predictor predicts the time for 5Ks,
@@ -13,7 +13,7 @@
 					<icon-clock />
 				</icon-base>
 			</Feature>
-
+			<hr>
 			<Feature
 				icon-position="right"
 				text="Using your past activities and machine learning, Race Time Predictor learns about your
@@ -26,7 +26,7 @@
 					<icon-m-l />
 				</icon-base>
 			</Feature>
-
+			<hr>
 			<Feature
 				icon-position="left"
 				text="Race Time Predictor is powered by Strava. It lets you easily import your past runs for
@@ -39,7 +39,7 @@
 					<icon-scatter-plot />
 				</icon-base>
 			</Feature>
-
+			<hr>
 			<Feature
 				icon-position="right"
 				text="We care about your privacy and don't store your activity data."
@@ -51,7 +51,7 @@
 					<icon-lock />
 				</icon-base>
 			</Feature>
-		</main>
+		</div>
 		<LoginBox />
 	</div>
 </template>

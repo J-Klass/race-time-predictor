@@ -1,12 +1,21 @@
 <template>
 	<div class="predictions">
-		<div
+		<template
 			v-for="(time, distance) in predictions"
-			:key="distance"
 		>
-			<p>{{ distance }}</p>
-			<h2>{{ secondsToString(time) }}</h2>
-		</div>
+			<p
+				:key="distance"
+				class="distance"
+			>
+				{{ distance }}
+			</p>
+			<h2
+				:key="distance"
+				class="time"
+			>
+				{{ secondsToString(time) }}
+			</h2>
+		</template>
 	</div>
 </template>
 
@@ -25,3 +34,18 @@
 		},
 	};
 </script>
+
+<style scoped>
+	.predictions {
+		display: grid;
+		grid-column-gap: var(--spacing-abs-small);
+		grid-template-columns: fit-content(0) fit-content(0);
+		align-items: center;
+		justify-content: center;
+	}
+
+	.distance {
+		text-align: right;
+		white-space: nowrap;
+	}
+</style>
