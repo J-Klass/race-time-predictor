@@ -17,7 +17,7 @@
 				:profile-url="data.profile.profileUrl"
 			/>
 			<Stats />
-			<Predictions />
+			<Predictions :predictions="data.predictions" />
 		</main>
 	</div>
 </template>
