@@ -5,9 +5,7 @@
 			TODO error
 		</template>
 		<!-- Loading -->
-		<template v-else-if="isLoading">
-			TODO loading spinner
-		</template>
+		<Spinner v-else-if="isLoading" />
 		<!-- Finished loading -->
 		<template v-else>
 			<Profile
@@ -28,6 +26,7 @@
 	import Header from '../components/Header.vue';
 	import Predictions from '../components/athlete/Predictions.vue';
 	import Profile from '../components/athlete/Profile.vue';
+	import Spinner from '../components/Spinner.vue';
 	import Stats from '../components/athlete/Stats.vue';
 
 	export default {
@@ -35,6 +34,7 @@
 			Header,
 			Predictions,
 			Profile,
+			Spinner,
 			Stats,
 		},
 		data() {
