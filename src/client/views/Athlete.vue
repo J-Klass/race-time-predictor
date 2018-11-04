@@ -1,9 +1,16 @@
 <template>
 	<div class="athlete">
-		<main>
-			<h1>Athlete</h1>
-			<p>{{ profile }}</p>
-			<p>{{ predictions }}</p>
+		<!-- Error -->
+		<main v-if="error">
+			TODO error
+		</main>
+		<!-- Loading -->
+		<main v-else-if="isLoading">
+			TODO loading spinner
+		</main>
+		<!-- Finished loading -->
+		<main v-else>
+			TODO profile, stats, and predictions
 		</main>
 	</div>
 </template>
@@ -17,46 +24,44 @@
 		},
 		data() {
 			return {
-				profile: {},
-				predictions: {},
+				data: {},
+				error: false,
+				isLoading: true,
+				oauthCode: '',
 			};
 		},
 		created() {
-			// Load oAuth code from LocalStorage, redirect to start page if it doesn't exist
-			const oauthCode = localStorage.getItem('oauthCode');
-			if (!oauthCode) {
-				this.$router.push('/');
-			}
-
-			// Fetch athlete profile
-			window.fetch(`/api/profile?code=${oauthCode}`)
-				.then(res => res.json())
-				.then((json) => {
-					if (json && json.success) {
-						this.profile = json.data;
-					} else {
-						// TODO: Error handling
-					}
-				})
-				.catch((err) => {
-					// TODO: Error handling
-					console.error(err);
-			});
-
-			// Fetch time predictions
-			window.fetch(`/api/predictions?code=${oauthCode}`)
-				.then(res => res.json())
-				.then((json) => {
-					if (json && json.success) {
-						this.predictions = json.data;
-					} else {
-						// TODO: Error handling
-					}
-				})
-				.catch((err) => {
-					// TODO: Error handling
-					console.error(err);
-			});
+			this.checkOauthCode();
+			this.fetchData();
+		},
+		methods: {
+			checkOauthCode() {
+				// Load OAuth code from LocalStorage, redirect to start page if it doesn't exist
+				this.oauthCode = localStorage.getItem('oauthCode');
+				if (!this.oauthCode) {
+					this.$router.push('/');
+				}
+			},
+			fetchData() {
+				// Fetch athlete profile, stats, and predictions
+				return window.fetch(`/api/athlete?code=${this.oauthCode}`)
+					.then(res => res.json())
+					.then((json) => {
+						this.isLoading = false;
+						if (json && json.success) {
+							this.data = json.data;
+							this.error = false;
+						} else {
+							console.error('Error in JSON response');
+							this.error = true;
+						}
+					})
+					.catch((err) => {
+						console.error(err);
+						this.error = true;
+						this.isLoading = false;
+				});
+			},
 		},
 	};
 </script>
