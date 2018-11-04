@@ -32,3 +32,10 @@ You can now run the app:
 
 1. Execute `yarn start` to bundle the Vue app
 2. Run `FLASK_ENV=development pipenv run start` to start the back end and serve the Vue app
+
+
+## Credits
+
+* Loading spinner: [SpinKit](http://tobiasahlin.com/spinkit/)
+* Color icons on start page: [Icons8 Flat Color Icons](https://github.com/icons8/flat-color-icons)
+* Error and terminal icons: [Boxicons](https://boxicons.com)
