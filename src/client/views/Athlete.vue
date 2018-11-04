@@ -10,17 +10,30 @@
 		</main>
 		<!-- Finished loading -->
 		<main v-else>
-			TODO profile, stats, and predictions
+			<Profile
+				:first-name="data.profile.firstName"
+				:last-name="data.profile.lastName"
+				:img-url="data.profile.imgUrl"
+				:profile-url="data.profile.profileUrl"
+			/>
+			<Stats />
+			<Predictions />
 		</main>
 	</div>
 </template>
 
 <script>
 	import Header from '../components/Header.vue';
+	import Predictions from '../components/athlete/Predictions.vue';
+	import Profile from '../components/athlete/Profile.vue';
+	import Stats from '../components/athlete/Stats.vue';
 
 	export default {
 		components: {
 			Header,
+			Predictions,
+			Profile,
+			Stats,
 		},
 		data() {
 			return {
