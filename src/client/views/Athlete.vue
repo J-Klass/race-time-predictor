@@ -1,9 +1,11 @@
 <template>
 	<div class="athlete centered">
 		<!-- Error -->
-		<template v-if="error">
-			TODO error
-		</template>
+		<Error
+			v-if="error"
+			message="Error loading athlete profile/predictions"
+			display-home-link
+		/>
 		<!-- Loading -->
 		<Spinner v-else-if="isLoading" />
 		<!-- Finished loading -->
@@ -23,6 +25,7 @@
 </template>
 
 <script>
+	import Error from '../components/Error.vue';
 	import Header from '../components/Header.vue';
 	import Predictions from '../components/athlete/Predictions.vue';
 	import Profile from '../components/athlete/Profile.vue';
@@ -31,6 +34,7 @@
 
 	export default {
 		components: {
+			Error,
 			Header,
 			Predictions,
 			Profile,

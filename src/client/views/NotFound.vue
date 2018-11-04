@@ -1,5 +1,18 @@
 <template>
 	<div class="not-found centered">
-		<h1>Page not found</h1>
+		<Error
+			message="The page you requested could not be found."
+			display-home-link
+		/>
 	</div>
 </template>
+
+<script>
+	import Error from '../components/Error.vue';
+
+	export default {
+		components: {
+			Error,
+		},
+	};
+</script>

@@ -29,6 +29,7 @@
 		--color-background-header: #E4EDF4;
 		--color-background: #FFFFFF;
 		--color-background-footer: #303030;
+		--color-error: #EE3232;
 		--color-text-faded: #838383;
 		--color-text-faded-dark: #5B5B5B;
 		--color-strava: #FC4C02;
