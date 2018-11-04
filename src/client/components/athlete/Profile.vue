@@ -1,10 +1,16 @@
 <template>
 	<div class="profile">
-		<img
-			:src="imgUrlWithDefault"
-			alt="Profile picture"
-			class="profile-image"
+		<a
+			:href="profileUrl"
+			target="_blank"
+			rel="noopener noreferrer"
 		>
+			<img
+				:src="imgUrlWithDefault"
+				alt="Profile picture"
+				class="profile-image"
+			>
+		</a>
 		<div>
 			<h2>{{ firstName }} {{ lastName }}</h2>
 			<a
