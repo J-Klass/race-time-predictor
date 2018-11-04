@@ -22,8 +22,13 @@ def calculate_predictions(activities):
     dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
 
     # Get predictions
-    predictions = calculate_prediction_5_10_half(dataframe)
-    predictions.append(calculate_prediction_marathon(dataframe))
+    predictions = {}
+
+    predictions_5_10_half = calculate_prediction_5_10_half(dataframe)
+    predictions.update(predictions_5_10_half)
+
+    prediction_marathon = calculate_prediction_marathon(dataframe)
+    predictions["Marathon"] = prediction_marathon
 
     return predictions
 
@@ -81,10 +86,10 @@ def calculate_prediction_5_10_half(dataframe):
     linear_regression_model_mse = mean_squared_error(y_predict, y_test)
     print("MSE: ", linear_regression_model_mse)
 
-    predictions = [
-        int(linear_regression_model.predict([[5000, 0]])[0][0]),
-        int(linear_regression_model.predict([[10000, 0]])[0][0]),
-        int(linear_regression_model.predict([[21097, 0]])[0][0]),
-    ]
+    predictions = {
+        "5K": int(linear_regression_model.predict([[5000, 0]])[0][0]),
+        "10K": int(linear_regression_model.predict([[10000, 0]])[0][0]),
+        "Half marathon": int(linear_regression_model.predict([[21097, 0]])[0][0]),
+    }
 
     return predictions
