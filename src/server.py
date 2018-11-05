@@ -1,12 +1,13 @@
 import os
+from concurrent.futures import ThreadPoolExecutor
 
 from flask import Flask, request, send_from_directory
 
 from server.auth import get_access_credentials
 from server.config import load_config
 from server.exceptions import AuthError
-from server.queries import fetch_activities, fetch_profile_stats
-from server.predictions import calculate_predictions
+from server.predictions import get_predictions
+from server.queries import fetch_profile, fetch_stats
 from server.responses import success, auth_error, server_error
 
 app = Flask(__name__)
@@ -24,12 +25,12 @@ client_id, client_secret = load_config()
 
 
 @app.route("/api/athlete", methods=["GET"])
-def get_profile():
+def get_athlete():
     """Fetch athlete profile and activities from Strava, run machine-learning algorithm to obtain
     predictions, and return relevant results to the client. Request must contain OAuth 2 code as
     query param
 
-    :return: profile
+    :return: Athlete information and race predictions
     :rtype: JSON object
     """
 
@@ -42,29 +43,28 @@ def get_profile():
     except Exception as e:
         return server_error(e)
 
-    data = {}
+    # Get profile, stats, and predictions in parallel
+    with ThreadPoolExecutor(3) as pool:
+        future_profile = pool.submit(fetch_profile, access_token)
+        future_stats = pool.submit(fetch_stats, access_token, athlete_id)
+        future_predictions = pool.submit(get_predictions, access_token)
+        futures = [future_profile, future_stats, future_predictions]
 
-    # Fetch athlete profile and stats
-    try:
-        data["profile"], data["stats"] = fetch_profile_stats(access_token, athlete_id)
-    except AuthError as e:
-        return auth_error(e)
-    except Exception as e:
-        return server_error(e)
+    # Handle exceptions
+    for future in futures:
+        e = future.exception()
+        if e:
+            if type(e) == AuthError:
+                return auth_error(e)
+            else:
+                return server_error(e)
 
-    # Fetch athlete's activities and calculate predictions
-    try:
-        activities = fetch_activities(access_token)
-    except AuthError as e:
-        return auth_error(e)
-    except Exception as e:
-        return server_error(e)
-
-    try:
-        data["predictions"] = calculate_predictions(activities)
-    except Exception as e:
-        return server_error(e)
-
+    # Send data to client
+    data = {
+        "profile": future_profile.result(),
+        "stats": future_stats.result(),
+        "predictions": future_predictions.result(),
+    }
     return success(data)
 
 

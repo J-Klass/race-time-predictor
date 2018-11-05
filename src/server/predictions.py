@@ -3,6 +3,22 @@ from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 
+from server.queries import fetch_activities
+
+
+def get_predictions(access_token):
+    """Fetch athlete's activities and calculate predictions
+
+    :param access_token: User's OAuth 2 access token for the Strava API
+    :type access_token: str
+    :return: Predictions
+    :rtype: dict
+
+    """
+
+    activities = fetch_activities(access_token)
+    return calculate_predictions(activities)
+
 
 def calculate_predictions(activities):
     """

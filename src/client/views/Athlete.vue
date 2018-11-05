@@ -67,11 +67,11 @@
 					.then(res => res.json())
 					.then((json) => {
 						this.isLoading = false;
-						if (json && json.success) {
+						if (json.success) {
 							this.data = json.data;
 							this.error = false;
 						} else {
-							console.error('Error in JSON response');
+							console.error(json.errorType);
 							this.error = true;
 						}
 					})
