@@ -35,7 +35,7 @@
 		align-items: center;
 		width: 100%;
 		height: 500px;
-		max-height: 100vh;
+		max-height: 60vh;
 		background: var(--color-background-header) url("../assets/header-background.jpg") no-repeat
 			center;
 		background-size: cover;

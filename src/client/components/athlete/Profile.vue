@@ -66,15 +66,26 @@
 </script>
 
 <style scoped>
-	.profile {
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	@media screen and (max-width: 600px) {
+		.profile {
+			text-align: center;
+		}
+	}
+
+	@media screen and (min-width: 601px) {
+		.profile {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.profile-image {
+			margin-right: var(--spacing-abs-large);
+		}
 	}
 
 	.profile-image {
 		width: 140px;
-		margin-right: var(--spacing-abs-large);
 		border-radius: 50%;
 	}
 

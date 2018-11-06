@@ -48,4 +48,16 @@
 	.feature-right .feature-icon {
 		margin-left: var(--spacing-abs-small);
 	}
+
+	@media screen and (max-width: 600px) {
+		.feature-icon {
+			width: 80px;
+		}
+	}
+
+	@media screen and (min-width: 601px) {
+		.feature-icon {
+			width: 100px;
+		}
+	}
 </style>

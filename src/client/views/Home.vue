@@ -7,7 +7,6 @@
 					10Ks, half marathons, marathons, or any distance you choose."
 			>
 				<icon-base
-					:height="iconHeight"
 					view-box="0 0 48 48"
 				>
 					<icon-clock />
@@ -20,7 +19,6 @@
 					fitness level and predicts times for future races."
 			>
 				<icon-base
-					:height="iconHeight"
 					view-box="0 0 48 48"
 				>
 					<icon-m-l />
@@ -33,7 +31,6 @@
 					its calculations."
 			>
 				<icon-base
-					:height="iconHeight"
 					view-box="0 0 48 48"
 				>
 					<icon-scatter-plot />
@@ -45,7 +42,6 @@
 				text="We care about your privacy and don't store your activity data."
 			>
 				<icon-base
-					:height="iconHeight"
 					view-box="0 0 48 48"
 				>
 					<icon-lock />
@@ -78,11 +74,6 @@
 			Footer,
 			Hero,
 			LoginBox,
-		},
-		data() {
-			return {
-				iconHeight: 100,
-			};
 		},
 	};
 </script>

@@ -61,6 +61,12 @@
 		background: var(--color-background-footer);
 	}
 
+	@media screen and (max-width: 601px) {
+		#app {
+			font-size: 90%;
+		}
+	}
+
 	main {
 		background: var(--color-background);
 	}
