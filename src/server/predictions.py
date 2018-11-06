@@ -12,46 +12,73 @@ def get_predictions(access_token):
     :param access_token: User's OAuth 2 access token for the Strava API
     :type access_token: str
     :return: Predictions
-    :rtype: dict
-
+    :rtype: JSON object
     """
 
     activities = fetch_activities(access_token)
-    return calculate_predictions(activities)
-
-
-def calculate_predictions(activities):
-    """
-    Calculate predictions
-    :param activities: list of user activities from strava
-    :type: JSON object
-    :return: predictions
-    """
 
     # Convert activities to pandas dataframe
     dataframe = pd.DataFrame(activities)
 
-    # Select only running entries
-    dataframe = dataframe.loc[dataframe["type"] == "Run"]
+    # clean dataframe
+    dataframe = clean_dataframe(dataframe, "Run")
 
-    # Select relevant columns
-    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
+    # Create response JSON
 
-    # Get predictions
-    predictions = {}
+    # check for error
+    error = False
+    if len(dataframe.index) < 3:
+        error = True
 
+    # check for warning
+    warning = False
+    if len(dataframe.index) < 10:
+        warning = True
+
+    # prediction times
+    times = {}
     predictions_5_10_half = calculate_prediction_5_10_half(dataframe)
-    predictions.update(predictions_5_10_half)
-
+    times.update(predictions_5_10_half)
     prediction_marathon = calculate_prediction_marathon(dataframe)
-    predictions["Marathon"] = prediction_marathon
+    times.update(prediction_marathon)
+
+    predictions = {
+        "error": error,
+        "warning": warning,
+        "distances": [
+            {"distance": "5K", "time": times[0]},
+            {"distance": "10K", "time": times[1]},
+            {"distance": "Half marathon", "time": times[2]},
+            {"distance": "Marathon", "time": times[3]},
+        ],
+        "graph": {"distances": dataframe[["distances"]], "movingtimes": dataframe[["distances"]]},
+    }
 
     return predictions
 
 
-def calculate_prediction_marathon(dataframe):
+def clean_dataframe(dataframe, type):
+    """Filter for only running data
+
+    :param dataframe: A dataframe with all strava data
+    :param type: string with either 'Ride' or 'Run'
+    :return: dataframe with only data of type 'Run'
     """
-    Calculate marathon prediction using a ridge regression
+
+    # TODO: Delete extreme outliers to avoid data with measuring error
+
+    # Select only running entries
+    dataframe = dataframe.loc[dataframe["type"] == type]
+
+    # Select relevant columns
+    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
+
+    return dataframe
+
+
+def calculate_prediction_marathon(dataframe):
+    """Calculate marathon prediction using a ridge regression
+
     :param dataframe: dataframe of running data
     :return: prediction for marathon time
     :rtype: int
@@ -62,7 +89,7 @@ def calculate_prediction_marathon(dataframe):
     y = dataframe[["moving_time"]]
 
     # Split into training and testing set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random_state=1)
 
     # Train ridge regression model
     ridge_regression_model = Ridge(alpha=0.01)
@@ -75,8 +102,8 @@ def calculate_prediction_marathon(dataframe):
 
 
 def calculate_prediction_5_10_half(dataframe):
-    """
-    Calculate prediction for 5k, 10k and half-marathon
+    """Calculate prediction for 5k, 10k and half-marathon
+
     :param dataframe: dataframe of running data
     :return: prediction for 5K, 10k, half-marathon
     :rtype: int[]
@@ -90,7 +117,7 @@ def calculate_prediction_5_10_half(dataframe):
     y = dataframe[["moving_time"]]
 
     # Split into training and testing set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random_state=1)
 
     # Train regression model
     linear_regression_model = LinearRegression()
