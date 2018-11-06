@@ -15,7 +15,7 @@
 			<icon-base
 				height="24"
 				view-box="0 0 24 24"
-				class="icon-terminal"
+				class="terminal-icon"
 			>
 				<icon-terminal />
 			</icon-base>
@@ -27,16 +27,18 @@
 			</p>
 		</div>
 		<br>
-		<a href="https://github.com/J-Klass/race-time-predictor">
+		<div>
 			<icon-base
 				height="20"
 				view-box="0 0 1024 999"
-				class="icon-github"
+				class="github-icon"
 			>
 				<icon-github />
 			</icon-base>
-			Source code on GitHub
-		</a>
+			<a href="https://github.com/J-Klass/race-time-predictor">
+				Source code on GitHub
+			</a>
+		</div>
 	</footer>
 </template>
 
@@ -78,11 +80,11 @@
 		color: var(--color-text-faded-dark);
 	}
 
-	.icon-terminal, .icon-github {
-		margin-right: 6px;
+	.terminal-icon, .github-icon {
+		margin-right: var(--spacing-icon);
 	}
 
-	.icon-github {
+	.github-icon {
 		margin-bottom: 2px;
 	}
 </style>

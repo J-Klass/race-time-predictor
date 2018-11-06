@@ -26,15 +26,15 @@
 
 	body {
 		/* Variables */
-		--color-background-header: #E4EDF4;
+		--color-background-header: #E8EBF7;
 		--color-background: #FFFFFF;
 		--color-background-footer: #303030;
 		--color-error: #EE3232;
-		--color-text-faded: #838383;
-		--color-text-faded-dark: #5B5B5B;
 		--color-strava: #FC4C02;
 		--color-strava-dark: #DD4302;
 		--color-text: #1D1D1D;
+		--color-text-faded: #838383;
+		--color-text-faded-dark: #5B5B5B;
 		--color-text-underline: #CACACA;
 		--color-white: #EFEFEF;
 		--font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
@@ -47,6 +47,7 @@
 		--line-height: 1.7;
 		--spacing-abs-small: 20px;
 		--spacing-abs-large: 40px;
+		--spacing-icon: 6px;
 		--spacing-rel-small: 4vw;
 		--spacing-rel-large: 8vw;
 		--transition: 0.15s;
@@ -69,6 +70,13 @@
 		max-width: 1000px;
 		margin: 0 auto;
 		padding: var(--spacing-rel-large);
+	}
+
+	h1 {
+		font-size: 200%;
+		font-weight: var(--font-weight-bold);
+		color: var(--color-strava);
+		letter-spacing: 0.05em;
 	}
 
 	h2 {

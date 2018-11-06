@@ -67,7 +67,7 @@
 
 <style scoped>
 	.login-box {
-		padding: var(--spacing-rel-small) var(--spacing-rel-large);
+		padding: var(--spacing-rel-large);
 		background: var(--color-background-header);
 		font-weight: var(--font-weight-semibold);
 		text-align: center;
