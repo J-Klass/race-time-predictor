@@ -25,7 +25,7 @@ def fetch_profile(access_token):
     return {
         "firstName": profile["firstname"],
         "lastName": profile["lastname"],
-        "imgUrl": profile["profile_medium"],
+        "imgUrl": profile["profile"],
         "profileUrl": "https://www.strava.com/athletes/{}".format(profile["id"]),
     }
 

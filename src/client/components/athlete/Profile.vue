@@ -27,7 +27,7 @@
 <script>
 	import placeholderImg from '../../assets/profile-img-placeholder.png';
 
-	const DEFAULT_IMG_URL = 'avatar/athlete/medium.png';
+	const DEFAULT_IMG_URL = 'avatar/athlete/large.png';
 
 	export default {
 		props: {
@@ -73,6 +73,7 @@
 	}
 
 	.profile-image {
+		width: 140px;
 		margin-right: var(--spacing-abs-large);
 		border-radius: 50%;
 	}
