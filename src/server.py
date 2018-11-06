@@ -75,6 +75,10 @@ if is_dev:
     def get_css(path):
         return send_from_directory(os.path.join(static_dir, "css"), path)
 
+    @app.route("/favicons/<path:path>", methods=["GET"])
+    def get_favicon(path):
+        return send_from_directory(os.path.join(static_dir, "favicons"), path)
+
     @app.route("/img/<path:path>", methods=["GET"])
     def get_img(path):
         return send_from_directory(os.path.join(static_dir, "img"), path)
