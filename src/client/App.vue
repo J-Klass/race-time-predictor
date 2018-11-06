@@ -1,23 +1,44 @@
 <template>
 	<div id="app">
-		<router-view />
+		<Header />
+		<main>
+			<router-view />
+		</main>
+		<Footer />
 	</div>
 </template>
+
+<script>
+	import Footer from './components/Footer.vue';
+	import Header from './components/Header.vue';
+
+	export default {
+		components: {
+			Footer,
+			Header,
+		},
+	};
+</script>
 
 <style>
 	/* Style reset */
 	@import "~minireset.css/minireset.min.css";
 
-	#app {
+	body {
 		/* Variables */
-		--color-background-hero: #E4EDF4;
-		--color-text-faded: #838383;
-		--color-text-faded-dark: #5B5B5B;
+		--color-background-header: #E8EBF7;
+		--color-background: #FFFFFF;
+		--color-background-footer: #303030;
+		--color-error: #EE3232;
 		--color-strava: #FC4C02;
 		--color-strava-dark: #DD4302;
 		--color-text: #1D1D1D;
+		--color-text-faded: #838383;
+		--color-text-faded-dark: #5B5B5B;
+		--color-text-underline: #CACACA;
 		--color-white: #EFEFEF;
-		--font-family: 'Work Sans', sans-serif;
+		--font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+			sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 		--font-size-small: 80%;
 		--font-size-normal: 19px;
 		--font-weight-normal: 400;
@@ -26,8 +47,9 @@
 		--line-height: 1.7;
 		--spacing-abs-small: 20px;
 		--spacing-abs-large: 40px;
-		--spacing-rel-small: 5vw;
-		--spacing-rel-large: 10vw;
+		--spacing-icon: 6px;
+		--spacing-rel-small: 4vw;
+		--spacing-rel-large: 8vw;
 		--transition: 0.15s;
 
 		/* Global styles */
@@ -36,17 +58,40 @@
 		font-weight: var(--font-weight-normal);
 		line-height: var(--line-height);
 		color: var(--color-text);
+		background: var(--color-background-footer);
 	}
 
 	main {
+		background: var(--color-background);
+	}
+
+	.centered {
 		width: 100%;
 		max-width: 1000px;
-		padding: var(--spacing-rel-large);
 		margin: 0 auto;
+		padding: var(--spacing-rel-large);
+	}
+
+	h1 {
+		font-size: 200%;
+		font-weight: var(--font-weight-bold);
+		color: var(--color-strava);
+		letter-spacing: 0.05em;
+	}
+
+	h2 {
+		font-size: 160%;
+		font-weight: var(--font-weight-semibold);
 	}
 
 	a {
 		color: inherit;
-		text-decoration: none;
+		text-underline-position: under;
+	}
+
+	hr {
+		margin: var(--spacing-rel-small) 0;
+		border: 0;
+		border-bottom: 1px solid var(--color-text-underline);
 	}
 </style>

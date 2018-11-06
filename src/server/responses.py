@@ -7,7 +7,9 @@ def success(data):
 
 def auth_error(exception):
     return (
-        json.dumps({"success": False, "authError": str(exception)}),
+        json.dumps(
+            {"success": False, "errorType": "Authentication error", "error": str(exception)}
+        ),
         400,
         {"ContentType": "application/json"},
     )
@@ -15,7 +17,7 @@ def auth_error(exception):
 
 def server_error(exception):
     return (
-        json.dumps({"success": False, "serverError": str(exception)}),
+        json.dumps({"success": False, "errorType": "Server error", "error": str(exception)}),
         500,
         {"ContentType": "application/json"},
     )

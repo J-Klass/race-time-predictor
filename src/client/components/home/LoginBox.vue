@@ -37,6 +37,11 @@
 		},
 		computed: {
 			loginUrl() {
+				// If OAuth code is found in LocalStorage, point to athlete page
+				if (localStorage.getItem('oauthCode')) {
+					return '/athlete';
+				}
+
 				// Generate URL to Strava login site
 				const loginUrl = new URL(apiUrl);
 				const urlParams = {
@@ -62,8 +67,8 @@
 
 <style scoped>
 	.login-box {
-		padding: var(--spacing-rel-small) var(--spacing-rel-large);
-		background: var(--color-background-hero);
+		padding: var(--spacing-rel-large);
+		background: var(--color-background-header);
 		font-weight: var(--font-weight-semibold);
 		text-align: center;
 	}

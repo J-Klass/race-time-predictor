@@ -1,10 +1,10 @@
 <template>
 	<div class="home">
-		<Hero />
-		<main>
+		<div class="centered">
 			<Feature
 				icon-position="left"
-				text="TODO"
+				text="Get time estimates for your next run. Race Time Predictor predicts the time for 5Ks,
+					10Ks, half marathons, marathons, or any distance you choose."
 			>
 				<icon-base
 					:height="iconHeight"
@@ -13,10 +13,11 @@
 					<icon-clock />
 				</icon-base>
 			</Feature>
-
+			<hr>
 			<Feature
 				icon-position="right"
-				text="TODO"
+				text="Using your past activities and machine learning, Race Time Predictor learns about your
+					fitness level and predicts times for future races."
 			>
 				<icon-base
 					:height="iconHeight"
@@ -25,10 +26,11 @@
 					<icon-m-l />
 				</icon-base>
 			</Feature>
-
+			<hr>
 			<Feature
 				icon-position="left"
-				text="TODO"
+				text="Race Time Predictor is powered by Strava. It lets you easily import your past runs for
+					its calculations."
 			>
 				<icon-base
 					:height="iconHeight"
@@ -37,10 +39,10 @@
 					<icon-scatter-plot />
 				</icon-base>
 			</Feature>
-
+			<hr>
 			<Feature
 				icon-position="right"
-				text="TODO"
+				text="We care about your privacy and don't store your activity data."
 			>
 				<icon-base
 					:height="iconHeight"
@@ -49,16 +51,15 @@
 					<icon-lock />
 				</icon-base>
 			</Feature>
-		</main>
-		<LoginLink />
-		<Footer />
+		</div>
+		<LoginBox />
 	</div>
 </template>
 
 <script>
 	import Footer from '../components/Footer.vue';
-	import Hero from '../components/home/Hero.vue';
-	import LoginLink from '../components/home/LoginBox.vue';
+	import Hero from '../components/Header.vue';
+	import LoginBox from '../components/home/LoginBox.vue';
 	import Feature from '../components/home/Feature.vue';
 	import IconBase from '../components/icons/IconBase.vue';
 	import IconClock from '../components/icons/svg/IconClock.vue';
@@ -76,18 +77,12 @@
 			Feature,
 			Footer,
 			Hero,
-			LoginLink,
+			LoginBox,
 		},
 		data() {
 			return {
 				iconHeight: 100,
 			};
-		},
-		created() {
-			// If OAuth code is found in LocalStorage, redirect to athlete page
-			if (localStorage.getItem('oauthCode')) {
-				this.$router.push('/athlete');
-			}
 		},
 	};
 </script>

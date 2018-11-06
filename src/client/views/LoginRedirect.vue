@@ -1,9 +1,10 @@
 <template>
-	<div class="login-redirect">
-		<div v-if="err">
-			<p>An error occurred while logging in</p>
-			<router-link to="/">Back to start page</router-link>
-		</div>
+	<div class="login-redirect centered">
+		<Error
+			v-if="err"
+			message="An error occurred while logging in."
+			display-home-link
+		/>
 		<div v-else>
 			<p>Logging in...</p>
 		</div>
@@ -11,7 +12,12 @@
 </template>
 
 <script>
+	import Error from '../components/Error.vue';
+
 	export default {
+		components: {
+			Error,
+		},
 		data() {
 			return {
 				err: false,
