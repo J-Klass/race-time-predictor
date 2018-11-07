@@ -36,6 +36,7 @@ You can now run the app:
 
 ## Credits
 
+* Runner icon in logo: [Freepik](https://www.flaticon.com/authors/freepik)
 * Loading spinner: [SpinKit](http://tobiasahlin.com/spinkit/)
 * Color icons on start page: [Icons8 Flat Color Icons](https://github.com/icons8/flat-color-icons)
 * Error and terminal icons: [Boxicons](https://boxicons.com)
