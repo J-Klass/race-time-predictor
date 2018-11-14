@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression, Ridge
-from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 
 from server.queries import fetch_activities
@@ -36,11 +35,9 @@ def get_predictions(access_token):
         warning = True
 
     # prediction times
-    times = {}
-    predictions_5_10_half = calculate_prediction_5_10_half(dataframe)
-    times.update(predictions_5_10_half)
+    times = calculate_prediction_5_10_half(dataframe)
     prediction_marathon = calculate_prediction_marathon(dataframe)
-    times.update(prediction_marathon)
+    times.append(prediction_marathon)
 
     predictions = {
         "error": error,
@@ -51,7 +48,10 @@ def get_predictions(access_token):
             {"distance": "Half marathon", "time": times[2]},
             {"distance": "Marathon", "time": times[3]},
         ],
-        "graph": {"distances": dataframe[["distances"]], "movingtimes": dataframe[["distances"]]},
+        "graph": {
+            "distances": dataframe["distance"].values.tolist(),
+            "movingtimes": dataframe["moving_time"].values.tolist(),
+        },
     }
 
     return predictions
@@ -123,16 +123,10 @@ def calculate_prediction_5_10_half(dataframe):
     linear_regression_model = LinearRegression()
     linear_regression_model.fit(X_train, y_train)
 
-    # Model validation
-    print("score: ", linear_regression_model.score(X_test, y_test))
-    y_predict = linear_regression_model.predict(X_test)
-    linear_regression_model_mse = mean_squared_error(y_predict, y_test)
-    print("MSE: ", linear_regression_model_mse)
-
-    predictions = {
-        "5K": int(linear_regression_model.predict([[5000, 0]])[0][0]),
-        "10K": int(linear_regression_model.predict([[10000, 0]])[0][0]),
-        "Half marathon": int(linear_regression_model.predict([[21097, 0]])[0][0]),
-    }
+    predictions = [
+        int(linear_regression_model.predict([[5000, 0]])[0][0]),
+        int(linear_regression_model.predict([[10000, 0]])[0][0]),
+        int(linear_regression_model.predict([[21097, 0]])[0][0]),
+    ]
 
     return predictions
