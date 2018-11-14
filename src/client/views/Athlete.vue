@@ -19,7 +19,6 @@
 			<Stats />
 			<hr>
 			<Predictions :predictions="data.predictions" />
-			<p>TODO graph</p>
 		</template>
 	</div>
 </template>

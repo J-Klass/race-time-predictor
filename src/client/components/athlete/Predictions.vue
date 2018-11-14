@@ -1,21 +1,26 @@
 <template>
 	<div class="predictions">
-		<template
-			v-for="(time, distance) in predictions"
-		>
-			<p
-				:key="distance"
-				class="distance"
+		<div class="predictions-numbers">
+			<template
+				v-for="prediction in predictions.distances"
 			>
-				{{ distance }}
-			</p>
-			<h2
-				:key="distance"
-				class="time"
-			>
-				{{ secondsToString(time) }}
-			</h2>
-		</template>
+				<p
+					:key="prediction.distance"
+					class="distance"
+				>
+					{{ prediction.distance }}
+				</p>
+				<h2
+					:key="prediction.distance"
+					class="time"
+				>
+					{{ secondsToString(prediction.time) }}
+				</h2>
+			</template>
+		</div>
+		<div class="predictions-graph">
+			<p>TODO graph</p>
+		</div>
 	</div>
 </template>
 
@@ -23,8 +28,8 @@
 	export default {
 		props: {
 			predictions: {
-				type: Array,
-				default: () => [],
+				type: Object,
+				default: () => {},
 			},
 		},
 		methods: {
@@ -36,7 +41,7 @@
 </script>
 
 <style scoped>
-	.predictions {
+	.predictions-numbers {
 		display: grid;
 		grid-column-gap: var(--spacing-abs-small);
 		grid-template-columns: fit-content(0) fit-content(0);
