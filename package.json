@@ -4,7 +4,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "vue-cli-service build src/client.js --mode production --watch",
+		"start": "vue-cli-service serve src/client.js --port 3000 --watch",
 		"build": "vue-cli-service build src/client.js",
 		"lint": "vue-cli-service lint"
 	},

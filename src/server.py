@@ -1,7 +1,7 @@
 import os
 from concurrent.futures import ThreadPoolExecutor
 
-from flask import Flask, request, send_from_directory
+from flask import Flask, request
 
 from server.auth import get_access_credentials
 from server.config import load_config
@@ -21,7 +21,7 @@ project_dir = os.path.dirname(src_dir)
 static_dir = os.path.join(project_dir, "dist")
 
 # Configuration
-client_id, client_secret = load_config()
+client_id, client_secret = load_config(is_dev, project_dir)
 
 
 @app.route("/api/athlete", methods=["GET"])
@@ -68,33 +68,8 @@ def get_athlete():
     return success(data)
 
 
-# Serve static files in development mode (handled by nginx in production)
-if is_dev:
-
-    @app.route("/css/<path:path>", methods=["GET"])
-    def get_css(path):
-        return send_from_directory(os.path.join(static_dir, "css"), path)
-
-    @app.route("/favicons/<path:path>", methods=["GET"])
-    def get_favicon(path):
-        return send_from_directory(os.path.join(static_dir, "favicons"), path)
-
-    @app.route("/img/<path:path>", methods=["GET"])
-    def get_img(path):
-        return send_from_directory(os.path.join(static_dir, "img"), path)
-
-    @app.route("/js/<path:path>", methods=["GET"])
-    def get_js(path):
-        return send_from_directory(os.path.join(static_dir, "js"), path)
-
-    @app.route("/", methods=["GET"], defaults={"path": ""})
-    @app.route("/<path:path>", methods=["GET"])
-    def catch_all(path):
-        return send_from_directory(static_dir, "index.html")
-
-
 if __name__ == "__main__":
     if is_dev:
-        app.run(debug=True, host="0.0.0.0", port=3000)
+        app.run(debug=True)
     else:
         app.run()

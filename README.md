@@ -16,7 +16,7 @@ Make sure you have Python, Pipenv, Node.js, and Yarn installed.
 
 ### Configuration
 
-Obtain your [credentials for accessing the Strava API](https://developers.strava.com). Rename the [`.env.example`](.env.example) file to `.env` and fill in your Strava app credentials:
+Obtain your [credentials for accessing the Strava API](https://developers.strava.com). Rename the [`.env.example`](.env.example) file to `.env.development` and fill in your Strava app credentials:
 
 ```
 VUE_APP_CLIENT_ID=your_client_id
