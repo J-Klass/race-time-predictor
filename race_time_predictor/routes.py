@@ -3,12 +3,12 @@ from concurrent.futures import ThreadPoolExecutor
 
 from flask import Flask, request
 
-from server.auth import get_access_credentials
-from server.config import load_config
-from server.exceptions import AuthError
-from server.predictions import get_predictions
-from server.queries import fetch_profile, fetch_stats
-from server.responses import success, auth_error, server_error
+from .server.auth import get_access_credentials
+from .server.config import load_config
+from .server.exceptions import AuthError
+from .server.predictions import get_predictions
+from .server.queries import fetch_profile, fetch_stats
+from .server.responses import success, auth_error, server_error
 
 app = Flask(__name__)
 
@@ -66,10 +66,3 @@ def get_athlete():
         "predictions": future_predictions.result(),
     }
     return success(data)
-
-
-if __name__ == "__main__":
-    if is_dev:
-        app.run(debug=True)
-    else:
-        app.run()

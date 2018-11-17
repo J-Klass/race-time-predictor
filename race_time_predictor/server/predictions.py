@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.model_selection import train_test_split
 
-from server.queries import fetch_activities
+from .queries import fetch_activities
 
 
 def get_predictions(access_token):

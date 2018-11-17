@@ -1,6 +1,6 @@
 import requests
 
-from server.exceptions import AuthError
+from .exceptions import AuthError
 
 
 def get_access_credentials(client_id, client_secret, code):

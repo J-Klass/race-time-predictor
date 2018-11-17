@@ -4,8 +4,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "vue-cli-service serve src/client.js --port 3000 --watch",
-		"build": "vue-cli-service build src/client.js",
+		"start": "vue-cli-service serve race_time_predictor/client/index.js --port 3000 --watch",
+		"build": "vue-cli-service build race_time_predictor/client/index.js",
 		"lint": "vue-cli-service lint"
 	},
 	"dependencies": {

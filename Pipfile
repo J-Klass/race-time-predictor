@@ -21,10 +21,10 @@ black = "*"
 python_version = "3.6"
 
 [scripts]
+start = "python run.py"
 init = "git config core.hooksPath .hooks"
 format = "black . --line-length=100"
 lint = "flake8 . --max-line-length=100"
-start = "python src/server.py"
 
 [pipenv]
 allow_prereleases = true

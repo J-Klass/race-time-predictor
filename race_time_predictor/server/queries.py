@@ -1,6 +1,6 @@
 import requests
 
-from server.exceptions import AuthError
+from .exceptions import AuthError
 
 api_url = "https://www.strava.com/api/v3"
 
