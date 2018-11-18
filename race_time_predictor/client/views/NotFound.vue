@@ -8,7 +8,7 @@
 </template>
 
 <script>
-	import Error from '../components/Error.vue';
+	import Error from '../components/general/Error.vue';
 
 	export default {
 		components: {

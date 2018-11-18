@@ -18,8 +18,8 @@
 </template>
 
 <script>
-	import IconBase from './icons/IconBase.vue';
-	import IconError from './icons/svg/IconError.vue';
+	import IconBase from '../icons/IconBase.vue';
+	import IconError from '../icons/svg/IconError.vue';
 
 	export default {
 		components: {
