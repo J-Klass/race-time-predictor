@@ -6,8 +6,10 @@
 			message="Error loading athlete profile/predictions"
 			display-home-link
 		/>
+
 		<!-- Loading -->
 		<Spinner v-else-if="isLoading" />
+
 		<!-- Finished loading -->
 		<template v-else>
 			<Profile
@@ -18,7 +20,7 @@
 			/>
 
 			<Separator title="Stats" />
-			<Stats />
+			<Stats :stats="data.stats" />
 			<Chart :chart-data="data.chart" />
 
 			<Separator title="Predictions" />
