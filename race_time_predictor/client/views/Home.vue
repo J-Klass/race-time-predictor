@@ -12,7 +12,7 @@
 					<icon-clock />
 				</icon-base>
 			</Feature>
-			<hr>
+			<Separator />
 			<Feature
 				icon-position="right"
 				text="Using your past activities and machine learning, Race Time Predictor learns about your
@@ -24,7 +24,7 @@
 					<icon-m-l />
 				</icon-base>
 			</Feature>
-			<hr>
+			<Separator />
 			<Feature
 				icon-position="left"
 				text="Race Time Predictor is powered by Strava. It lets you easily import your past runs for
@@ -36,7 +36,7 @@
 					<icon-scatter-plot />
 				</icon-base>
 			</Feature>
-			<hr>
+			<Separator />
 			<Feature
 				icon-position="right"
 				text="We care about your privacy and don't store your activity data."
@@ -62,6 +62,7 @@
 	import IconLock from '../components/icons/svg/IconLock.vue';
 	import IconML from '../components/icons/svg/IconML.vue';
 	import IconScatterPlot from '../components/icons/svg/IconScatterPlot.vue';
+	import Separator from '../components/general/Separator.vue';
 
 	export default {
 		components: {
@@ -74,6 +75,7 @@
 			Footer,
 			Hero,
 			LoginBox,
+			Separator,
 		},
 	};
 </script>

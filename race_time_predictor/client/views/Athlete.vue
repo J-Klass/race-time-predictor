@@ -16,30 +16,35 @@
 				:img-url="data.profile.imgUrl"
 				:profile-url="data.profile.profileUrl"
 			/>
+
+			<Separator title="Stats" />
 			<Stats />
 			<Chart :chart-data="data.chart" />
-			<hr>
+
+			<Separator title="Predictions" />
 			<Predictions :predictions="data.predictions" />
 		</template>
 	</div>
 </template>
 
 <script>
+	import Chart from '../components/athlete/Chart.vue';
 	import Error from '../components/general/Error.vue';
 	import Header from '../components/Header.vue';
-	import Chart from '../components/athlete/Chart.vue';
 	import Predictions from '../components/athlete/Predictions.vue';
 	import Profile from '../components/athlete/Profile.vue';
+	import Separator from '../components/general/Separator.vue';
 	import Spinner from '../components/general/Spinner.vue';
 	import Stats from '../components/athlete/Stats.vue';
 
 	export default {
 		components: {
-			Error,
 			Chart,
+			Error,
 			Header,
 			Predictions,
 			Profile,
+			Separator,
 			Spinner,
 			Stats,
 		},

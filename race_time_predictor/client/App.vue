@@ -94,10 +94,4 @@
 		color: inherit;
 		text-underline-position: under;
 	}
-
-	hr {
-		margin: var(--spacing-rel-small) 0;
-		border: 0;
-		border-bottom: 1px solid var(--color-text-underline);
-	}
 </style>
