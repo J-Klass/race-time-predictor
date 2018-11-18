@@ -17,6 +17,7 @@
 				:profile-url="data.profile.profileUrl"
 			/>
 			<Stats />
+			<Chart :chart-data="data.chart" />
 			<hr>
 			<Predictions :predictions="data.predictions" />
 		</template>
@@ -26,6 +27,7 @@
 <script>
 	import Error from '../components/Error.vue';
 	import Header from '../components/Header.vue';
+	import Chart from '../components/athlete/Chart.vue';
 	import Predictions from '../components/athlete/Predictions.vue';
 	import Profile from '../components/athlete/Profile.vue';
 	import Spinner from '../components/Spinner.vue';
@@ -34,6 +36,7 @@
 	export default {
 		components: {
 			Error,
+			Chart,
 			Header,
 			Predictions,
 			Profile,

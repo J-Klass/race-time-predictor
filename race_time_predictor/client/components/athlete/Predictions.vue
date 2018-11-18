@@ -1,30 +1,27 @@
 <template>
 	<div class="predictions">
-		<div class="predictions-numbers">
-			<template
-				v-for="prediction in predictions.distances"
+		<template
+			v-for="prediction in predictionsFormatted"
+		>
+			<p
+				:key="`distance-${prediction.distance}`"
+				class="distance"
 			>
-				<p
-					:key="prediction.distance"
-					class="distance"
-				>
-					{{ prediction.distance }}
-				</p>
-				<h2
-					:key="prediction.distance"
-					class="time"
-				>
-					{{ secondsToString(prediction.time) }}
-				</h2>
-			</template>
-		</div>
-		<div class="predictions-graph">
-			<p>TODO graph</p>
-		</div>
+				{{ prediction.distance }}
+			</p>
+			<h2
+				:key="`time-${prediction.distance}`"
+				class="time"
+			>
+				{{ prediction.time }}
+			</h2>
+		</template>
 	</div>
 </template>
 
 <script>
+	import { msToString } from '../../utils';
+
 	export default {
 		props: {
 			predictions: {
@@ -32,16 +29,19 @@
 				default: () => {},
 			},
 		},
-		methods: {
-			secondsToString(seconds) {
-				return new Date(seconds * 1000).toISOString().substr(11, 8);
+		computed: {
+			predictionsFormatted() {
+				return this.predictions.predictionData.map(({ distance, time }) => ({
+					distance,
+					time: msToString(time * 1000),
+				}));
 			},
 		},
 	};
 </script>
 
 <style scoped>
-	.predictions-numbers {
+	.predictions {
 		display: grid;
 		grid-column-gap: var(--spacing-abs-small);
 		grid-template-columns: fit-content(0) fit-content(0);
@@ -49,8 +49,12 @@
 		justify-content: center;
 	}
 
+	.distance,
+	.time {
+		white-space: nowrap;
+	}
+
 	.distance {
 		text-align: right;
-		white-space: nowrap;
 	}
 </style>

@@ -59,10 +59,11 @@ def get_athlete():
             else:
                 return server_error(e)
 
+    profile = future_profile.result()
+    stats = future_stats.result()
+    predictions = future_predictions.result()
+
     # Send data to client
-    data = {
-        "profile": future_profile.result(),
-        "stats": future_stats.result(),
-        "predictions": future_predictions.result(),
-    }
+    data = {"profile": profile, "stats": stats}
+    data.update(predictions)
     return success(data)

@@ -40,17 +40,19 @@ def get_predictions(access_token):
     times.append(prediction_marathon)
 
     predictions = {
-        "error": error,
-        "warning": warning,
-        "distances": [
-            {"distance": "5K", "time": times[0]},
-            {"distance": "10K", "time": times[1]},
-            {"distance": "Half marathon", "time": times[2]},
-            {"distance": "Marathon", "time": times[3]},
-        ],
-        "graph": {
+        "chart": {
             "distances": dataframe["distance"].values.tolist(),
-            "movingtimes": dataframe["moving_time"].values.tolist(),
+            "times": dataframe["moving_time"].values.tolist(),
+        },
+        "predictions": {
+            "error": error,
+            "warning": warning,
+            "predictionData": [
+                {"distance": "5K", "time": times[0]},
+                {"distance": "10K", "time": times[1]},
+                {"distance": "Half marathon", "time": times[2]},
+                {"distance": "Marathon", "time": times[3]},
+            ],
         },
     }
 
