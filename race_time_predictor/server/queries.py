@@ -2,7 +2,8 @@ import requests
 
 from .exceptions import AuthError
 
-api_url = "https://www.strava.com/api/v3"
+API_URL = "https://www.strava.com/api/v3"
+MAX_ACTIVITIES_PER_PAGE = 200
 
 
 def fetch_profile(access_token):
@@ -17,7 +18,7 @@ def fetch_profile(access_token):
     headers = {"Authorization": "Bearer " + access_token}
 
     # Fetch athlete profile
-    r = requests.get(api_url + "/athlete", headers=headers)
+    r = requests.get(API_URL + "/athlete", headers=headers)
     profile = r.json()
     if "errors" in profile:
         raise AuthError(profile["message"])
@@ -44,7 +45,7 @@ def fetch_stats(access_token, athlete_id):
     headers = {"Authorization": "Bearer " + access_token}
 
     # Fetch athlete stats
-    r = requests.get(api_url + "/athletes/{}/stats".format(athlete_id), headers=headers)
+    r = requests.get(API_URL + "/athletes/{}/stats".format(athlete_id), headers=headers)
     stats = r.json()
     if "errors" in stats:
         raise AuthError(stats["message"])
@@ -68,9 +69,21 @@ def fetch_activities(access_token):
     headers = {"Authorization": "Bearer " + access_token}
 
     # Fetch list of athlete's activities
-    r = requests.get(api_url + "/athlete/activities", headers=headers)
-    activities = r.json()
-    if "errors" in activities:
-        raise AuthError(activities["message"])
+    activities = []
+    page = 1
+    while True:
+        params = {"per_page": MAX_ACTIVITIES_PER_PAGE, "page": page}
+        r = requests.get(API_URL + "/athlete/activities", headers=headers, params=params)
+        new_activities = r.json()
+
+        if "errors" in new_activities:
+            raise AuthError(new_activities["message"])
+        activities.extend(new_activities)
+
+        # Continue fetching activities if necessary
+        if len(new_activities) == MAX_ACTIVITIES_PER_PAGE:
+            page += 1
+        else:
+            break
 
     return activities
