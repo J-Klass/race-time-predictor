@@ -59,7 +59,16 @@
 						},
 					}],
 				},
-				// TODO tooltip value format
+				tooltips: {
+					callbacks: {
+						label(tooltipItem) {
+							return mToLocaleUnit(tooltipItem.xLabel);
+						},
+						afterLabel(tooltipItem) {
+							return msToString(tooltipItem.yLabel, true);
+						},
+					},
+				},
 			});
 		},
 	};
