@@ -64,7 +64,7 @@
 		display: grid;
 		grid-column-gap: var(--spacing-abs-small);
 		grid-template-columns: fit-content(0) fit-content(0);
-		align-items: center;
+		align-items: baseline;
 		justify-content: center;
 	}
 
