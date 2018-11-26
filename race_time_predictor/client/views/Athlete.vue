@@ -19,12 +19,12 @@
 				:profile-url="data.profile.profileUrl"
 			/>
 
+			<Separator title="Predictions" />
+			<Predictions :predictions="data.predictions" />
+
 			<Separator title="Stats" />
 			<Stats :stats="data.stats" />
 			<Chart :chart-data="data.chart" />
-
-			<Separator title="Predictions" />
-			<Predictions :predictions="data.predictions" />
 		</template>
 	</div>
 </template>
