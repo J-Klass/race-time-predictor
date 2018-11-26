@@ -1,63 +1,16 @@
-<template>
-	<div class="chart">
-		<apexcharts
-			:options="chartOptions"
-			:series="series"
-			class="chart-wrapper"
-			width="100%"
-			type="scatter"
-		/>
-	</div>
-</template>
-
 <script>
-	import VueApexCharts from 'vue-apexcharts';
+	import { Scatter } from 'vue-chartjs';
 	import { mToLocaleUnit, msToString } from '../../utils';
 
+	const fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+
 	export default {
-		components: {
-			apexcharts: VueApexCharts,
-		},
+		extends: Scatter,
 		props: {
 			chartData: {
 				type: Object,
 				default: () => {},
 			},
-		},
-		data() {
-			return {
-				chartOptions: {
-					chart: {
-						fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-						toolbar: {
-							show: false,
-						},
-						zoom: {
-							enabled: false,
-						},
-					},
-					colors: ['#6B81DA'],
-					tooltip: {
-						x: {
-							formatter: s => msToString(s, true),
-						},
-					},
-					xaxis: {
-						type: 'datetime',
-						min: 0,
-						tickAmount: 7,
-						labels: {
-							formatter: s => msToString(s, false),
-						},
-					},
-					yaxis: {
-						type: 'numeric',
-						labels: {
-							formatter: mToLocaleUnit,
-						},
-					},
-				},
-			};
 		},
 		computed: {
 			series() {
@@ -66,23 +19,48 @@
 				distances.forEach((distance, index) => {
 					const time = times[index] * 1000;
 					data.push({
-						x: time,
-						y: distance,
+						x: distance,
+						y: time,
 					});
 				});
-				return [{
-					name: 'Distance',
-					data,
-				}];
+				return data;
 			},
+		},
+		mounted() {
+			this.renderChart({
+				datasets: [{
+					data: this.series,
+				}],
+			}, {
+				// TODO aspect ratio
+				elements: {
+					point: {
+						backgroundColor: 'rgba(107, 129, 218, 0.6)',
+						hoverRadius: 10,
+						radius: 6,
+					},
+				},
+				legend: {
+					display: false,
+				},
+				scales: {
+					xAxes: [{
+						ticks: {
+							beginAtZero: true,
+							callback: mToLocaleUnit,
+							fontFamily,
+						},
+					}],
+					yAxes: [{
+						ticks: {
+							beginAtZero: true,
+							callback: ms => msToString(ms, false),
+							fontFamily,
+						},
+					}],
+				},
+				// TODO tooltip value format
+			});
 		},
 	};
 </script>
-
-<style scoped>
-	.chart-wrapper {
-		width: 100%;
-		max-width: 600px;
-		margin: 0 auto;
-	}
-</style>
