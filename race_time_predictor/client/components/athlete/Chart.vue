@@ -12,7 +12,7 @@
 
 <script>
 	import VueApexCharts from 'vue-apexcharts';
-	import { msToString, mToKm } from '../../utils';
+	import { mToLocaleUnit, msToString } from '../../utils';
 
 	export default {
 		components: {
@@ -53,7 +53,7 @@
 					yaxis: {
 						type: 'numeric',
 						labels: {
-							formatter: m => `${mToKm(m)} km`,
+							formatter: mToLocaleUnit,
 						},
 					},
 				},
