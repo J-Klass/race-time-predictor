@@ -24,7 +24,15 @@
 
 			<Separator title="Stats" />
 			<Stats :stats="data.stats" />
-			<Chart :chart-data="data.chart" />
+			<Chart
+				:chart-data="data.chart"
+				:use-metric-system="useMetricSystem"
+			/>
+
+			<UnitSwitch
+				:use-metric-system="useMetricSystem"
+				@toggle-metric-system="toggleMetricSystem"
+			/>
 		</template>
 	</div>
 </template>
@@ -38,6 +46,7 @@
 	import Separator from '../components/general/Separator.vue';
 	import Spinner from '../components/general/Spinner.vue';
 	import Stats from '../components/athlete/Stats.vue';
+	import UnitSwitch from '../components/athlete/UnitSwitch.vue';
 
 	export default {
 		components: {
@@ -49,6 +58,7 @@
 			Separator,
 			Spinner,
 			Stats,
+			UnitSwitch,
 		},
 		data() {
 			return {
@@ -56,6 +66,7 @@
 				error: false,
 				isLoading: true,
 				oauthCode: '',
+				useMetricSystem: window.navigator.language !== 'en-US',
 			};
 		},
 		created() {
@@ -89,6 +100,9 @@
 						this.error = true;
 						this.isLoading = false;
 				});
+			},
+			toggleMetricSystem() {
+				this.useMetricSystem = !this.useMetricSystem;
 			},
 		},
 	};

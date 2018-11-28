@@ -30,6 +30,8 @@
 		--color-background: #FFFFFF;
 		--color-background-footer: #303030;
 		--color-error: #EE3232;
+		--color-main: #C5CDED;
+		--color-main-light: #DBE0F4;
 		--color-strava: #FC4C02;
 		--color-strava-dark: #DD4302;
 		--color-text: #1D1D1D;

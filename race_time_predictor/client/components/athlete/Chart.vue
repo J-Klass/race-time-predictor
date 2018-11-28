@@ -1,6 +1,6 @@
 <script>
 	import { Scatter } from 'vue-chartjs';
-	import { mToLocaleUnit, msToString } from '../../utils';
+	import { mToString, msToString } from '../../utils';
 
 	const fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 
@@ -21,6 +21,10 @@
 				type: Number,
 				default: null,
 			},
+			useMetricSystem: {
+				type: Boolean,
+				default: null,
+			},
 		},
 		computed: {
 			series() {
@@ -36,50 +40,60 @@
 				return data;
 			},
 		},
+		watch: {
+			useMetricSystem() {
+				this.render();
+			},
+		},
 		mounted() {
-			this.renderChart({
-				datasets: [{
-					data: this.series,
-				}],
-			}, {
-				aspectRatio: 2,
-				elements: {
-					point: {
-						backgroundColor: 'rgba(107, 129, 218, 0.6)',
-						hoverRadius: 10,
-						radius: 6,
-					},
-				},
-				legend: {
-					display: false,
-				},
-				scales: {
-					xAxes: [{
-						ticks: {
-							beginAtZero: true,
-							callback: mToLocaleUnit,
-							fontFamily,
-						},
+			this.render();
+		},
+		methods: {
+			render() {
+				this.renderChart({
+					datasets: [{
+						data: this.series,
 					}],
-					yAxes: [{
-						ticks: {
-							beginAtZero: true,
-							callback: ms => msToString(ms, false),
-							fontFamily,
-						},
-					}],
-				},
-				tooltips: {
-					callbacks: {
-						label(tooltipItem) {
-							return mToLocaleUnit(tooltipItem.xLabel);
-						},
-						afterLabel(tooltipItem) {
-							return msToString(tooltipItem.yLabel, true);
+				}, {
+					aspectRatio: 2,
+					elements: {
+						point: {
+							backgroundColor: 'rgba(107, 129, 218, 0.6)',
+							hoverRadius: 10,
+							radius: 6,
 						},
 					},
-				},
-			});
+					legend: {
+						display: false,
+					},
+					scales: {
+						xAxes: [{
+							ticks: {
+								beginAtZero: true,
+								callback: m => mToString(m, this.useMetricSystem),
+								fontFamily,
+							},
+						}],
+						yAxes: [{
+							ticks: {
+								beginAtZero: true,
+								callback: ms => msToString(ms, false),
+								fontFamily,
+							},
+						}],
+					},
+					tooltips: {
+						callbacks: {
+							label(tooltipItem) {
+								return mToString(tooltipItem.xLabel, this.useMetricSystem);
+							},
+							afterLabel(tooltipItem) {
+								return msToString(tooltipItem.yLabel, true);
+							},
+						},
+					},
+				});
+			},
 		},
 	};
 </script>

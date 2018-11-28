@@ -1,6 +1,3 @@
-const locale = window.navigator.language;
-
-
 /**
  * Round to 2 decimals
  */
@@ -10,16 +7,17 @@ function round(number) {
 
 
 /**
- * Convert meters to km or mi (depending on locale unit)
+ * Convert meters to kilometers or miles
  */
-export function mToLocaleUnit(m) {
-	if (locale === 'en-US') {
-		const mi = m * 0.000621371192;
-		return `${round(mi)} mi`;
+export function mToString(m, useMetricSystem) {
+	if (useMetricSystem) {
+		// Convert to km
+		const km = m / 1000;
+		return `${round(km)} km`; // Round to 2 decimals
 	}
-	// Convert to km
-	const km = m / 1000;
-	return `${round(km)} km`; // Round to 2 decimals
+	// Convert to miles
+	const mi = m * 0.000621371192;
+	return `${round(mi)} mi`;
 }
 
 
