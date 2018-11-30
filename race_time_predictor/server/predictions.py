@@ -5,6 +5,11 @@ from sklearn.model_selection import train_test_split
 
 from .queries import fetch_activities
 
+MARATHON = 42195
+HALF_MARATHON = 21097
+TEN_K = 10000
+FIVE_K = 5000
+
 
 def get_predictions(access_token):
     """Fetch athlete's activities and calculate predictions
@@ -19,6 +24,9 @@ def get_predictions(access_token):
 
     # Convert activities to pandas dataframe
     dataframe = pd.DataFrame(activities)
+
+    # Get graph data
+    chart = create_graph_data(dataframe)
 
     # clean dataframe
     dataframe = clean_dataframe(dataframe, "Run")
@@ -37,20 +45,17 @@ def get_predictions(access_token):
 
     # Prediction times
     predictions = calculate_predictions(dataframe)
-
+    print(type(chart))
     response = {
-        "chart": {
-            "distances": dataframe["distance"].values.tolist(),
-            "times": dataframe["moving_time"].values.tolist(),
-        },
+        "chart": chart,
         "predictions": {
             "error": error,
             "warning": warning,
             "predictionData": [
-                {"distance": "5K", "time": predictions[0]},
-                {"distance": "10K", "time": predictions[1]},
-                {"distance": "Half marathon", "time": predictions[2]},
-                {"distance": "Marathon", "time": predictions[3]},
+                {"title": "5K", "time": predictions[0], "distance": FIVE_K},
+                {"title": "10K", "time": predictions[1], "distance": TEN_K},
+                {"title": "Half marathon", "time": predictions[2], "distance": HALF_MARATHON},
+                {"title": "Marathon", "time": predictions[3], "distance": MARATHON},
             ],
         },
     }
@@ -72,6 +77,14 @@ def clean_dataframe(dataframe, type):
     # Select relevant columns
     dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
 
+    # Isolation Forest for outlier detection
+    rng = pd.np.random.RandomState(42)
+    clf = IsolationForest(max_samples=100, random_state=rng, contamination=0.01)
+    clf.fit(dataframe)
+    dataframe["outlier"] = clf.predict(dataframe)
+    dataframe = dataframe.loc[dataframe["outlier"] == 1]
+    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
+
     return dataframe
 
 
@@ -82,13 +95,6 @@ def calculate_predictions(dataframe):
     :return: prediction for running times
     :rtype: int[]
     """
-    # Isolation Forest for outlier detection
-    rng = pd.np.random.RandomState(42)
-    clf = IsolationForest(max_samples=100, random_state=rng, contamination=0.01)
-    clf.fit(dataframe)
-    dataframe["outlier"] = clf.predict(dataframe)
-    dataframe = dataframe.loc[dataframe["outlier"] == 1]
-    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
 
     # Define Target
     X = dataframe.drop("moving_time", axis=1)
@@ -103,10 +109,25 @@ def calculate_predictions(dataframe):
 
     # Prediction
     predictions = [
-        int(kernel_ridge_model.predict([[5000, 0]])[0][0]),
-        int(kernel_ridge_model.predict([[10000, 0]])[0][0]),
-        int(kernel_ridge_model.predict([[21097, 0]])[0][0]),
-        int(kernel_ridge_model.predict([[42195, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[FIVE_K, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[TEN_K, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[HALF_MARATHON, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[MARATHON, 0]])[0][0]),
     ]
 
     return predictions
+
+
+def create_graph_data(dataframe):
+    """Create graph data
+
+    :param dataframe:
+    :return: JSON with graph data
+    """
+
+    dataframe = dataframe.loc[dataframe["type"] == "Run"]
+
+    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain", "start_date"]]
+    chart = dataframe.to_dict("records")
+
+    return chart
