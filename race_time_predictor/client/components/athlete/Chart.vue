@@ -55,6 +55,7 @@
 						data: this.series,
 					}],
 				}, {
+					animation: false,
 					aspectRatio: 2,
 					elements: {
 						point: {
@@ -84,12 +85,8 @@
 					},
 					tooltips: {
 						callbacks: {
-							label(tooltipItem) {
-								return mToString(tooltipItem.xLabel, this.useMetricSystem);
-							},
-							afterLabel(tooltipItem) {
-								return msToString(tooltipItem.yLabel, true);
-							},
+							label: tooltipItem => mToString(tooltipItem.xLabel, this.useMetricSystem),
+							afterLabel: tooltipItem => msToString(tooltipItem.yLabel, true),
 						},
 					},
 				});
