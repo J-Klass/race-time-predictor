@@ -55,6 +55,7 @@
 						data: this.series,
 					}],
 				}, {
+					animation: false,
 					aspectRatio: 2,
 					elements: {
 						point: {
