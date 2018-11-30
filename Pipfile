@@ -12,6 +12,8 @@ numpy = "*"
 scipy = "*"
 scikit-learn = "*"
 matplotlib = "*"
+gunicorn = "*"
+wheel = "*"
 
 [dev-packages]
 black = "*"
