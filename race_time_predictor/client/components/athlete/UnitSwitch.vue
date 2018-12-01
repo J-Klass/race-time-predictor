@@ -1,6 +1,6 @@
 <template>
 	<div class="switch-wrapper">
-		<p>km</p>
+		<p class="small-text">km</p>
 		<label class="switch">
 			<input
 				:checked="!useMetricSystem"
@@ -9,7 +9,7 @@
 			>
 			<span class="toggle" />
 		</label>
-		<p>mi</p>
+		<p class="small-text">mi</p>
 	</div>
 </template>
 
@@ -34,7 +34,6 @@
 		justify-content: center;
 		align-items: center;
 		margin-top: $spacing-rel-small;
-		font-size: $font-size-small;
 	}
 
 	.switch {

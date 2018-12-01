@@ -1,5 +1,5 @@
 <template>
-	<footer>
+	<footer class="small-text">
 		<a href="https://www.strava.com/">
 			<icon-base
 				title="Powered by Strava"
@@ -62,7 +62,6 @@
 <style lang="scss" scoped>
 	footer {
 		margin: $spacing-rel-small $spacing-rel-large;
-		font-size: $font-size-small;
 		color: $color-text-faded;
 		text-align: center;
 

@@ -1,14 +1,14 @@
 <template>
 	<div class="stats">
-		<div>
+		<div class="stats-entry">
 			<h2>{{ stats.allRuns.count }}</h2>
 			<p>Runs</p>
 		</div>
-		<div>
+		<div class="stats-entry">
 			<h2>{{ Math.round(stats.allRuns.distance / 1000) }} km</h2>
 			<p>Distance</p>
 		</div>
-		<div>
+		<div class="stats-entry">
 			<h2>{{ stats.allRuns.elevation_gain }} m</h2>
 			<p>Elevation gain</p>
 		</div>
@@ -29,12 +29,22 @@
 <style lang="scss" scoped>
 	.stats {
 		display: grid;
-		grid-column-gap: $spacing-abs-large;
-		grid-template-columns: fit-content(0) fit-content(0) fit-content(0);
 		align-items: center;
 		justify-content: center;
 		margin-bottom: $spacing-rel-small;
 		text-align: center;
 		white-space: nowrap;
+
+		@include small-screen {
+			line-height: $line-height-small;
+
+			.stats-entry {
+				margin-bottom: $spacing-rel-small;
+			}
+		}
+		@include large-screen {
+			grid-template-columns: fit-content(0) fit-content(0) fit-content(0);
+			grid-column-gap: $spacing-abs-large;
+		}
 	}
 </style>

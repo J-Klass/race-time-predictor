@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="title"
-		class="separator"
+		class="separator small-text"
 	>
 		{{ title }}
 	</div>
@@ -34,7 +34,6 @@
 	.separator {
 		display: flex;
 		align-items: center;
-		font-size: $font-size-small;
 		text-align: center;
 		color: $color-text-faded;
 		text-transform: uppercase;

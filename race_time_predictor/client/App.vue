@@ -63,6 +63,10 @@
 		font-weight: $font-weight-semibold;
 	}
 
+	.small-text {
+		font-size: $font-size-small;
+	}
+
 	a {
 		color: inherit;
 		text-underline-position: under;

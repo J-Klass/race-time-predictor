@@ -15,7 +15,7 @@
 			<h2>{{ firstName }} {{ lastName }}</h2>
 			<a
 				href=""
-				class="sign-out-link"
+				class="sign-out-link small-text"
 				@click="signOut"
 			>
 				Sign out
@@ -87,7 +87,6 @@
 	}
 
 	.sign-out-link {
-		font-size: $font-size-small;
 		color: $color-text-faded;
 		transition: $transition;
 

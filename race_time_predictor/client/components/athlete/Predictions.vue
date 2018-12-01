@@ -22,12 +22,13 @@
 					>
 						{{ prediction.title }}
 					</p>
-					<p
+					<div
 						:key="`time-${prediction.distance}`"
 						class="time-col"
 					>
-						<span class="time large-text">{{ prediction.time }}</span>({{ prediction.speed }})
-					</p>
+						<p class="large-text">{{ prediction.time }}</p>
+						<p class="small-text">{{ prediction.speed }}</p>
+					</div>
 				</template>
 			</div>
 		</template>
@@ -69,9 +70,9 @@
 	.prediction-numbers {
 		display: grid;
 		grid-column-gap: $spacing-abs-small;
-		grid-template-columns: fit-content(0) fit-content(0);
 		align-items: baseline;
 		justify-content: center;
+		grid-template-columns: fit-content(0) fit-content(0);
 	}
 
 	.banner {
@@ -80,6 +81,7 @@
 
 	.distance-col,
 	.time-col {
+		margin-bottom: $spacing-rel-small / 2;
 		white-space: nowrap;
 	}
 
@@ -87,7 +89,7 @@
 		text-align: right;
 	}
 
-	.time {
-		margin-right: $spacing-abs-small / 2;
+	.time-col .large-text {
+		line-height: $line-height-small;
 	}
 </style>
