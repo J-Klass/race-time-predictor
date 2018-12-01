@@ -18,16 +18,16 @@
 				>
 					<p
 						:key="`distance-${prediction.distance}`"
-						class="distance"
+						class="distance-col"
 					>
 						{{ prediction.title }}
 					</p>
-					<h2
+					<p
 						:key="`time-${prediction.distance}`"
-						class="time"
+						class="time-col"
 					>
-						{{ prediction.time }} ({{ prediction.speed }})
-					</h2>
+						<span class="time large-text">{{ prediction.time }}</span>({{ prediction.speed }})
+					</p>
 				</template>
 			</div>
 		</template>
@@ -78,12 +78,16 @@
 		margin-bottom: var(--spacing-rel-small);
 	}
 
-	.distance,
-	.time {
+	.distance-col,
+	.time-col {
 		white-space: nowrap;
 	}
 
-	.distance {
+	.distance-col {
 		text-align: right;
+	}
+
+	.time {
+		margin-right: calc(var(--spacing-abs-small) / 2);
 	}
 </style>

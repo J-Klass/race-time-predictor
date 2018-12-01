@@ -87,7 +87,8 @@
 		letter-spacing: 0.05em;
 	}
 
-	h2 {
+	h2,
+	.large-text {
 		font-size: 160%;
 		font-weight: var(--font-weight-semibold);
 	}

@@ -1,10 +1,11 @@
 <script>
 	/* eslint-disable camelcase */
 
+	import Chart from 'chart.js';
 	import { Scatter } from 'vue-chartjs';
-	import { mToString, msToString } from '../../utils';
+	import { dateToStr, getSpeedString, mToKmOrMi, mToMOrFt, msToString } from '../../utils';
 
-	const fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+	Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 
 	export default {
 		extends: Scatter,
@@ -67,23 +68,40 @@
 						xAxes: [{
 							ticks: {
 								beginAtZero: true,
-								callback: m => mToString(m, this.useMetricSystem),
-								fontFamily,
+								callback: m => mToKmOrMi(m, this.useMetricSystem),
 							},
 						}],
 						yAxes: [{
 							ticks: {
 								beginAtZero: true,
 								callback: ms => msToString(ms, false),
-								fontFamily,
 							},
 						}],
 					},
 					tooltips: {
 						callbacks: {
-							label: tooltipItem => mToString(tooltipItem.xLabel, this.useMetricSystem),
-							afterLabel: tooltipItem => msToString(tooltipItem.yLabel, true),
+							title: tooltipItem => mToKmOrMi(tooltipItem[0].xLabel, this.useMetricSystem),
+							label: () => null,
+							afterLabel: (tooltipItem) => {
+								const dataEntry = this.chartData[tooltipItem.index];
+								const distance = tooltipItem.xLabel;
+								const time = tooltipItem.yLabel;
+
+								const timeStr = msToString(time, true);
+								const speedStr = getSpeedString(distance, time, this.useMetricSystem);
+								const elevationStr = mToMOrFt(dataEntry.total_elevation_gain, this.useMetricSystem);
+								const dateStr = dateToStr(dataEntry.start_date);
+								return `Time: ${timeStr}\nSpeed: ${speedStr}\nElevation gain: ${elevationStr}\nDate: ${dateStr}`;
+							},
 						},
+						displayColors: false,
+						backgroundColor: '#ECECEC',
+						titleFontSize: 16,
+						titleFontColor: '#1D1D1D',
+						bodyFontColor: '#1D1D1D',
+						bodyFontSize: 13,
+						xPadding: 15,
+						yPadding: 15,
 					},
 				});
 			},

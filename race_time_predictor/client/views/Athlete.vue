@@ -18,6 +18,10 @@
 				:img-url="data.profile.imgUrl"
 				:profile-url="data.profile.profileUrl"
 			/>
+			<UnitSwitch
+				:use-metric-system="useMetricSystem"
+				@toggle-metric-system="toggleMetricSystem"
+			/>
 
 			<Separator title="Predictions" />
 			<Predictions
@@ -30,11 +34,6 @@
 			<Chart
 				:chart-data="data.chart"
 				:use-metric-system="useMetricSystem"
-			/>
-
-			<UnitSwitch
-				:use-metric-system="useMetricSystem"
-				@toggle-metric-system="toggleMetricSystem"
 			/>
 		</template>
 	</div>

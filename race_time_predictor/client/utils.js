@@ -1,8 +1,8 @@
 /**
  * Round to 2 decimals
  */
-function round(number) {
-	return Math.round(number * 100) / 100;
+function round(number, decimals) {
+	return Math.round(number * (10 ** decimals)) / (10 ** decimals);
 }
 
 
@@ -11,6 +11,14 @@ function round(number) {
  */
 function mToKm(m) {
 	return m / 1000;
+}
+
+
+/**
+ * Convert meters to feet
+ */
+function mToFt(m) {
+	return m / 0.3048;
 }
 
 
@@ -25,15 +33,29 @@ function mToMiles(m) {
 /**
  * Convert meters to kilometers or miles
  */
-export function mToString(m, useMetricSystem) {
+export function mToKmOrMi(m, useMetricSystem) {
 	if (useMetricSystem) {
 		// Convert to km
 		const km = mToKm(m);
-		return `${round(km)} km`; // Round to 2 decimals
+		return `${round(km, 2)} km`;
 	}
 	// Convert to miles
 	const mi = mToMiles(m);
-	return `${round(mi)} mi`;
+	return `${round(mi, 2)} mi`;
+}
+
+
+/**
+ * Convert meters to kilometers or miles
+ */
+export function mToMOrFt(m, useMetricSystem) {
+	if (useMetricSystem) {
+		// Keep m
+		return `${round(m, 0)} m`;
+	}
+	// Convert to feet
+	const ft = mToFt(m);
+	return `${round(ft, 0)} ft`;
 }
 
 
@@ -69,7 +91,16 @@ export function getSpeedString(m, ms, useMetricSystem) {
 
 	// Convert to speed string
 	const date = new Date(msPerDistUnit);
-	const s = date.getSeconds();
+	const s = date.getSeconds().toString().padStart(2, '0');
 	const min = date.getMinutes();
 	return `${min}:${s}/${useMetricSystem ? 'km' : 'mi'}`;
+}
+
+
+/**
+ * Format date as string
+ */
+export function dateToStr(d) {
+	const date = new Date(d);
+	return date.toLocaleDateString();
 }
