@@ -65,37 +65,34 @@
 	};
 </script>
 
-<style scoped>
-	@media screen and (max-width: 600px) {
-		.profile {
+<style lang="scss" scoped>
+	.profile {
+		@include small-screen {
 			text-align: center;
 		}
-	}
-
-	@media screen and (min-width: 601px) {
-		.profile {
+		@include large-screen {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-		}
-
-		.profile-image {
-			margin-right: var(--spacing-abs-large);
 		}
 	}
 
 	.profile-image {
 		width: 140px;
 		border-radius: 50%;
+
+		@include large-screen {
+			margin-right: $spacing-abs-large;
+		}
 	}
 
 	.sign-out-link {
-		font-size: var(--font-size-small);
-		color: var(--color-text-faded);
-		transition: var(--transition);
-	}
+		font-size: $font-size-small;
+		color: $color-text-faded;
+		transition: $transition;
 
-	.sign-out-link:hover {
-		color: var(--color-text-faded-dark);
+		&:hover {
+			color: $color-text-faded-dark;
+		}
 	}
 </style>

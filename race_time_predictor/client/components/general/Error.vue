@@ -39,12 +39,12 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.error {
 		text-align: center;
 	}
 
 	.error-icon {
-		color: var(--color-error);
+		color: $color-error;
 	}
 </style>

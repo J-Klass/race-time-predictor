@@ -26,14 +26,14 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.stats {
 		display: grid;
-		grid-column-gap: var(--spacing-abs-large);
+		grid-column-gap: $spacing-abs-large;
 		grid-template-columns: fit-content(0) fit-content(0) fit-content(0);
 		align-items: center;
 		justify-content: center;
-		margin-bottom: var(--spacing-rel-small);
+		margin-bottom: $spacing-rel-small;
 		text-align: center;
 		white-space: nowrap;
 	}

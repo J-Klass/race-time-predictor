@@ -22,7 +22,7 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.feature {
 		display: flex;
 		align-items: center;
@@ -34,29 +34,26 @@
 
 	.feature-left {
 		text-align: left;
-	}
 
-	.feature-left .feature-icon {
-		margin-right: var(--spacing-abs-small);
+		.feature-icon {
+			margin-right: $spacing-abs-small;
+		}
 	}
 
 	.feature-right {
 		flex-direction: row-reverse;
 		text-align: right;
-	}
 
-	.feature-right .feature-icon {
-		margin-left: var(--spacing-abs-small);
-	}
-
-	@media screen and (max-width: 600px) {
 		.feature-icon {
-			width: 80px;
+			margin-left: $spacing-abs-small;
 		}
 	}
 
-	@media screen and (min-width: 601px) {
-		.feature-icon {
+	.feature-icon {
+		@include small-screen {
+			width: 80px;
+		}
+		@include large-screen {
 			width: 100px;
 		}
 	}

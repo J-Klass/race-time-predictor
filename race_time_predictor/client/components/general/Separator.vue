@@ -19,39 +19,45 @@
 	};
 </script>
 
-<style>
+<style lang="scss" scoped>
 	hr,
 	.separator::before,
 	.separator::after {
 		border: 0;
-		border-bottom: 1px solid var(--color-text-underline);
+		border-bottom: 1px solid $color-text-underline;
 	}
 
 	hr {
-		margin: var(--spacing-rel-small) 0;
+		margin: $spacing-rel-small 0;
 	}
 
 	.separator {
 		display: flex;
 		align-items: center;
-		margin: var(--spacing-rel-large) 0 var(--spacing-rel-small) 0;
-		font-size: var(--font-size-small);
+		font-size: $font-size-small;
 		text-align: center;
-		color: var(--color-text-faded);
+		color: $color-text-faded;
 		text-transform: uppercase;
-	}
 
-	.separator::before,
-	.separator::after {
-		content: '';
-		flex: 1;
-	}
+		@include small-screen {
+			margin: $spacing-abs-large 0 $spacing-rel-small 0;
+		}
+		@include large-screen {
+			margin: $spacing-rel-large 0 $spacing-rel-small 0;
+		}
 
-	.separator::before {
-		margin-right: 1em;
-	}
+		&::before,
+		&::after {
+			content: '';
+			flex: 1;
+		}
 
-	.separator::after {
-		margin-left: 1em;
+		&::before {
+			margin-right: 1em;
+		}
+
+		&::after {
+			margin-left: 1em;
+		}
 	}
 </style>

@@ -59,29 +59,29 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	footer {
-		margin: var(--spacing-rel-small) var(--spacing-rel-large);
-		font-size: var(--font-size-small);
-		color: var(--color-text-faded);
+		margin: $spacing-rel-small $spacing-rel-large;
+		font-size: $font-size-small;
+		color: $color-text-faded;
 		text-align: center;
-	}
 
-	footer > * {
-		display: inline-flex;
-		align-items: center;
+		& > * {
+			display: inline-flex;
+			align-items: center;
+		}
 	}
 
 	a {
-		transition: var(--transition);
-	}
+		transition: $transition;
 
-	a:hover {
-		color: var(--color-text-faded-dark);
+		&:hover {
+			color: $color-text-faded-dark;
+		}
 	}
 
 	.terminal-icon, .github-icon {
-		margin-right: var(--spacing-icon);
+		margin-right: $spacing-icon;
 	}
 
 	.github-icon {

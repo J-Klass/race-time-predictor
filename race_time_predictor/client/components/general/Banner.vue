@@ -41,20 +41,20 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.banner {
 		display: flex;
 		align-items: center;
-		padding: var(--spacing-abs-small);
+		padding: $spacing-abs-small;
 		border-radius: 10px;
-	}
 
-	.banner svg {
-		margin-right: calc(var(--spacing-abs-small) / 2);
-	}
+		svg {
+			margin-right: $spacing-abs-small / 2;
+		}
 
-	.banner p {
-		flex: 1;
+		p {
+			flex: 1;
+		}
 	}
 
 	.error {

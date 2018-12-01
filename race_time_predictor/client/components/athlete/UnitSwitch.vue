@@ -28,27 +28,35 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.switch-wrapper {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-top: var(--spacing-rel-small);
-		font-size: var(--font-size-small);
+		margin-top: $spacing-rel-small;
+		font-size: $font-size-small;
 	}
 
 	.switch {
 		position: relative;
 		width: 36px;
 		height: 24px;
-		margin: 0 calc(var(--spacing-abs-small) / 2);
-	}
+		margin: 0 $spacing-abs-small / 2;
 
-	/* Hide checkbox */
-	.switch input {
-		opacity: 0;
-		width: 0;
-		height: 0;
+		// Hide checkbox
+		input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+
+			&:checked + .toggle:before {
+				transform: translateX(12px);
+			}
+		}
+
+		&:hover .toggle:before {
+			background-color: $color-main-light;
+		}
 	}
 
 	.toggle {
@@ -59,28 +67,20 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		background-color: var(--color-background-footer);
+		background-color: $color-background-footer;
 		border-radius: 34px;
 		transition: 0.2s;
-	}
 
-	.toggle:before {
-		position: absolute;
-		content: "";
-		width: 16px;
-		height: 16px;
-		left: 4px;
-		bottom: 4px;
-		background-color: var(--color-main);
-		border-radius: 50%;
-		transition: 0.2s;
-	}
-
-	.switch:hover .toggle:before {
-		background-color: var(--color-main-light);
-	}
-
-	input:checked + .toggle:before {
-		transform: translateX(12px);
+		&:before {
+			position: absolute;
+			content: "";
+			width: 16px;
+			height: 16px;
+			left: 4px;
+			bottom: 4px;
+			background-color: $color-main;
+			border-radius: 50%;
+			transition: 0.2s;
+		}
 	}
 </style>

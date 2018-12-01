@@ -41,12 +41,12 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	svg {
 		display: inline-block;
 	}
 
 	g {
-		transition: var(--transition);
+		transition: $transition;
 	}
 </style>

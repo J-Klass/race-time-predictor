@@ -29,15 +29,14 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	header {
 		display: flex;
 		align-items: center;
 		width: 100%;
 		height: 500px;
 		max-height: 60vh;
-		background: var(--color-background-header) url("../assets/header-background.jpg") no-repeat
-			center;
+		background: $color-background-header url("../assets/header-background.jpg") no-repeat center;
 		background-size: cover;
 	}
 

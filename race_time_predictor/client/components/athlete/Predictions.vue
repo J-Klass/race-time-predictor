@@ -65,17 +65,17 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.prediction-numbers {
 		display: grid;
-		grid-column-gap: var(--spacing-abs-small);
+		grid-column-gap: $spacing-abs-small;
 		grid-template-columns: fit-content(0) fit-content(0);
 		align-items: baseline;
 		justify-content: center;
 	}
 
 	.banner {
-		margin-bottom: var(--spacing-rel-small);
+		margin-bottom: $spacing-rel-small;
 	}
 
 	.distance-col,
@@ -88,6 +88,6 @@
 	}
 
 	.time {
-		margin-right: calc(var(--spacing-abs-small) / 2);
+		margin-right: $spacing-abs-small / 2;
 	}
 </style>

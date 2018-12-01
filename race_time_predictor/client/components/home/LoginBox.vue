@@ -65,21 +65,21 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.login-box {
-		padding: var(--spacing-rel-large);
-		background: var(--color-background-header);
-		font-weight: var(--font-weight-semibold);
+		padding: $spacing-rel-large;
+		background: $color-background-header;
+		font-weight: $font-weight-semibold;
 		text-align: center;
 	}
 
 	.login-link {
 		display: inline-block;
-		margin-top: var(--spacing-abs-small);
-		color: var(--color-strava);
-	}
+		margin-top: $spacing-abs-small;
+		color: $color-strava;
 
-	.login-link:hover {
-		color: var(--color-strava-dark);
+		&:hover {
+			color: $color-strava-dark;
+		}
 	}
 </style>
