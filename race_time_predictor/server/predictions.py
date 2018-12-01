@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.ensemble import IsolationForest
-from sklearn.kernel_ridge import KernelRidge
-from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import train_test_split, GridSearchCV
 
 from .queries import fetch_activities
 
@@ -45,7 +45,7 @@ def get_predictions(access_token):
 
     # Prediction times
     predictions = calculate_predictions(dataframe)
-    print(type(chart))
+
     response = {
         "chart": chart,
         "predictions": {
@@ -75,7 +75,9 @@ def clean_dataframe(dataframe, type):
     dataframe = dataframe.loc[dataframe["type"] == type]
 
     # Select relevant columns
-    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
+    dataframe = dataframe[
+        ["moving_time", "distance", "total_elevation_gain", "elev_high", "elev_low"]
+    ]
 
     # Isolation Forest for outlier detection
     rng = pd.np.random.RandomState(42)
@@ -83,7 +85,7 @@ def clean_dataframe(dataframe, type):
     clf.fit(dataframe)
     dataframe["outlier"] = clf.predict(dataframe)
     dataframe = dataframe.loc[dataframe["outlier"] == 1]
-    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain"]]
+    dataframe = dataframe[["moving_time", "distance", "total_elevation_gain", "elev_high"]]
 
     return dataframe
 
@@ -104,15 +106,16 @@ def calculate_predictions(dataframe):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random_state=1)
 
     # Train ridge regression model
-    kernel_ridge_model = KernelRidge(alpha=1.0)
+    params = {"alpha": [25, 10, 4, 2, 1.0, 0.8, 0.5, 0.3, 0.2, 0.1, 0.05, 0.02, 0.01]}
+    kernel_ridge_model = GridSearchCV(Ridge(), params, cv=5, verbose=1)
     kernel_ridge_model.fit(X_train, y_train)
 
     # Prediction
     predictions = [
-        int(kernel_ridge_model.predict([[FIVE_K, 0]])[0][0]),
-        int(kernel_ridge_model.predict([[TEN_K, 0]])[0][0]),
-        int(kernel_ridge_model.predict([[HALF_MARATHON, 0]])[0][0]),
-        int(kernel_ridge_model.predict([[MARATHON, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[FIVE_K, 0, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[TEN_K, 0, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[HALF_MARATHON, 0, 0]])[0][0]),
+        int(kernel_ridge_model.predict([[MARATHON, 0, 0]])[0][0]),
     ]
 
     return predictions
