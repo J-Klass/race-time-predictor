@@ -1,4 +1,6 @@
 <script>
+	/* eslint-disable camelcase */
+
 	import { Scatter } from 'vue-chartjs';
 	import { mToString, msToString } from '../../utils';
 
@@ -8,8 +10,8 @@
 		extends: Scatter,
 		props: {
 			chartData: {
-				type: Object,
-				default: () => {},
+				type: Array,
+				default: () => [],
 			},
 			// Width and height need to be set to null to override the defaults (400) set by vue-chartjs.
 			// These defaults break the aspectRatio option
@@ -28,16 +30,10 @@
 		},
 		computed: {
 			series() {
-				const data = [];
-				const { distances, times } = this.chartData;
-				distances.forEach((distance, index) => {
-					const time = times[index] * 1000;
-					data.push({
-						x: distance,
-						y: time,
-					});
-				});
-				return data;
+				return this.chartData.map(({ distance, moving_time }) => ({
+					x: distance,
+					y: moving_time * 1000,
+				}));
 			},
 		},
 		watch: {

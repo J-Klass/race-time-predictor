@@ -20,13 +20,13 @@
 						:key="`distance-${prediction.distance}`"
 						class="distance"
 					>
-						{{ prediction.distance }}
+						{{ prediction.title }}
 					</p>
 					<h2
 						:key="`time-${prediction.distance}`"
 						class="time"
 					>
-						{{ prediction.time }}
+						{{ prediction.time }} ({{ prediction.speed }})
 					</h2>
 				</template>
 			</div>
@@ -36,7 +36,7 @@
 
 <script>
 	import Banner from '../general/Banner.vue';
-	import { msToString } from '../../utils';
+	import { getSpeedString, msToString } from '../../utils';
 
 	export default {
 		components: {
@@ -47,12 +47,18 @@
 				type: Object,
 				default: () => {},
 			},
+			useMetricSystem: {
+				type: Boolean,
+				default: null,
+			},
 		},
 		computed: {
 			predictionsFormatted() {
-				return this.predictions.predictionData.map(({ distance, time }) => ({
+				return this.predictions.predictionData.map(({ title, time, distance }) => ({
+					title,
 					distance,
-					time: msToString(time * 1000),
+					time: msToString(time * 1000, true),
+					speed: getSpeedString(distance, time * 1000, this.useMetricSystem),
 				}));
 			},
 		},

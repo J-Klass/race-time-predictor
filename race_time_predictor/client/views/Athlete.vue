@@ -20,7 +20,10 @@
 			/>
 
 			<Separator title="Predictions" />
-			<Predictions :predictions="data.predictions" />
+			<Predictions
+				:predictions="data.predictions"
+				:use-metric-system="useMetricSystem"
+			/>
 
 			<Separator title="Stats" />
 			<Stats :stats="data.stats" />
