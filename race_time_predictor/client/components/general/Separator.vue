@@ -28,7 +28,12 @@
 	}
 
 	hr {
-		margin: $spacing-rel-small 0;
+		@include small-screen {
+			margin: $spacing-rel-large 0;
+		}
+		@include large-screen {
+			margin: $spacing-rel-small 0;
+		}
 	}
 
 	.separator {
@@ -37,13 +42,7 @@
 		text-align: center;
 		color: $color-text-faded;
 		text-transform: uppercase;
-
-		@include small-screen {
-			margin: $spacing-abs-large 0 $spacing-rel-small 0;
-		}
-		@include large-screen {
-			margin: $spacing-rel-large 0 $spacing-rel-small 0;
-		}
+		margin: $spacing-rel-large 0 $spacing-rel-small 0;
 
 		&::before,
 		&::after {
