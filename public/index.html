@@ -18,15 +18,19 @@
 		<meta name="msapplication-config" content="/favicons/browserconfig.xml">
 		<meta name="theme-color" content="#506edc">
 
-		<!-- Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121868014-3"></script>
+		<!-- Fathom Analytics -->
 		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag('js', new Date());
-			gtag('config',  { 'anonymize_ip': true });
+			(function (f, a, t, h, o, m) {
+				a[h] = a[h] || function () {
+					(a[h].q = a[h].q || []).push(arguments)
+				};
+				o = f.createElement('script'),
+					m = f.getElementsByTagName('script')[0];
+				o.async = 1; o.src = t; o.id = 'fathom-script';
+				m.parentNode.insertBefore(o, m)
+			})(document, window, '//analytics.samuelmeuli.com/tracker.js', 'fathom');
+			fathom('set', 'siteId', 'FDOAI');
+			fathom('trackPageview');
 		</script>
 	</head>
 
