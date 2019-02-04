@@ -10,14 +10,14 @@ hooks:
 	git config core.hooksPath .hooks
 
 .PHONY: start
-start: start-python start-js
+start: start_python start_js
 
 .PHONY: start_python
-start-python:
+start_python:
 	export FLASK_ENV=development; pipenv run python run.py
 
-.PHONY: start-js
-start-js:
+.PHONY: start_js
+start_js:
 	yarn start
 
 .PHONY: build
