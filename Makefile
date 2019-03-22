@@ -1,13 +1,11 @@
 MAKEFLAGS += -j2
+MODULE_PATH = race_time_predictor
 
 .PHONY: install
 install:
+	git config core.hooksPath .hooks
 	pipenv install --dev
 	yarn install
-
-.PHONY: hooks
-hooks:
-	git config core.hooksPath .hooks
 
 .PHONY: start
 start: start_python start_js
@@ -26,9 +24,9 @@ build:
 
 .PHONY: format
 format:
-	black race_time_predictor --line-length=100 $(BLACK_FLAGS)
+	pipenv run black ${MODULE_PATH} --line-length=100 $(BLACK_FLAGS)
 
 .PHONY: lint
 lint:
-	flake8 race_time_predictor --max-line-length=100
+	pipenv run flake8 ${MODULE_PATH} --max-line-length=100
 	yarn lint

@@ -11,7 +11,6 @@ Make sure you have Python, Pipenv, Node.js, and Yarn installed.
 
 1. Clone the repository: `git clone [repo-url]`
 2. Install all dependencies: `make install`
-3. Set up the pre-commit hooks: `make hooks`
 
 
 ### Configuration
@@ -23,7 +22,7 @@ VUE_APP_CLIENT_ID=your_client_id
 CLIENT_SECRET=your_client_secret
 ```
 
-The Flask server now has access to both environment variables; the Vue client only to the client ID (hence the `VIEW_APP_` prefix). 
+The Flask server now has access to both environment variables; the Vue client only to the client ID (hence the `VIEW_APP_` prefix).
 
 
 ### Start
