@@ -28,10 +28,14 @@
 				:predictions="data.predictions"
 				:use-metric-system="useMetricSystem"
 			/>
+			<PredictionsChart
+				:chart-data="data.predictions_graph"
+				:use-metric-system="useMetricSystem"
+			/>
 
 			<Separator title="Stats" />
 			<Stats :stats="data.stats" />
-			<Chart
+			<StatsChart
 				:chart-data="data.chart"
 				:use-metric-system="useMetricSystem"
 			/>
@@ -40,26 +44,28 @@
 </template>
 
 <script>
-	import Chart from '../components/athlete/Chart.vue';
 	import Error from '../components/general/Error.vue';
 	import Header from '../components/Header.vue';
 	import Predictions from '../components/athlete/Predictions.vue';
+	import PredictionsChart from '../components/athlete/PredictionsChart';
 	import Profile from '../components/athlete/Profile.vue';
 	import Separator from '../components/general/Separator.vue';
 	import Spinner from '../components/general/Spinner.vue';
 	import Stats from '../components/athlete/Stats.vue';
+	import StatsChart from '../components/athlete/StatsChart.vue';
 	import UnitSwitch from '../components/athlete/UnitSwitch.vue';
 
 	export default {
 		components: {
-			Chart,
 			Error,
 			Header,
 			Predictions,
+			PredictionsChart,
 			Profile,
 			Separator,
 			Spinner,
 			Stats,
+			StatsChart,
 			UnitSwitch,
 		},
 		data() {

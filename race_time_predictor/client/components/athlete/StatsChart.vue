@@ -1,11 +1,8 @@
 <script>
 	/* eslint-disable camelcase */
 
-	import Chart from 'chart.js';
 	import { Scatter } from 'vue-chartjs';
 	import { dateToStr, getSpeedString, mToKmOrMi, mToMOrFt, msToString } from '../../utils';
-
-	Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 
 	export default {
 		extends: Scatter,
