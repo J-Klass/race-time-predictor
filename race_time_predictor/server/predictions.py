@@ -44,7 +44,10 @@ def get_predictions(access_token):
         warning = True
 
     # Prediction times
-    predictions = calculate_predictions(dataframe)
+    predictions = calculate_predictions(dataframe)["predictions"]
+
+    # Prediction graph
+    prediction_graph = calculate_predictions(dataframe)["prediction_graph"]
 
     response = {
         "chart": chart,
@@ -58,6 +61,7 @@ def get_predictions(access_token):
                 {"title": "Marathon", "time": predictions[3], "distance": MARATHON},
             ],
         },
+        "predictions_graph": prediction_graph,
     }
 
     return response
@@ -118,7 +122,14 @@ def calculate_predictions(dataframe):
         int(kernel_ridge_model.predict([[MARATHON, 0, 0]])[0][0]),
     ]
 
-    return predictions
+    # Prediction graph
+    prediction_graph = []
+    for i in range(5000, 51000, 1000):
+        prediction_graph.append(
+            {"distance": i, "time": int(kernel_ridge_model.predict([[i, 0, 0]])[0][0])}
+        )
+
+    return {"predictions": predictions, "prediction_graph": prediction_graph}
 
 
 def create_graph_data(dataframe):
